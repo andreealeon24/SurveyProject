@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SurveysProject.Models.Survey>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<body>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model=> model.Title)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Title
+                    </td>
+
+                    <td>
+                        <a href="@Url.Action("Index", "CompleteSurvey")">Complete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</body>
+
