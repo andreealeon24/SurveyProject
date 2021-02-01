@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SurveysProject.Models.Data
@@ -7,8 +9,10 @@ namespace SurveysProject.Models.Data
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int QuestionOptionId { get; set; }
-        [Column(TypeName = "nvarchar(30)")]
 
+        [Required(ErrorMessage = "This field is required.")]
+        [DisplayName("Question Option")]
+        [Column(TypeName = "nvarchar(30)")]
         public string QuestionOptionText { get; set; }
         public virtual Question Question { get; set; }
     }

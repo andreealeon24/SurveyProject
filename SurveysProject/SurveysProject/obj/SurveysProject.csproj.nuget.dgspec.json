@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Andreea\\Desktop\\Facultate\\Anul III\\Practica\\SurveysProject\\SurveysProject\\SurveysProject.csproj": {}
+    "C:\\Users\\Andreea\\Desktop\\Facultate\\Anul III\\Practica\\SurveyProject\\SurveysProject\\SurveysProject\\SurveysProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Andreea\\Desktop\\Facultate\\Anul III\\Practica\\SurveysProject\\SurveysProject\\SurveysProject.csproj": {
+    "C:\\Users\\Andreea\\Desktop\\Facultate\\Anul III\\Practica\\SurveyProject\\SurveysProject\\SurveysProject\\SurveysProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Andreea\\Desktop\\Facultate\\Anul III\\Practica\\SurveysProject\\SurveysProject\\SurveysProject.csproj",
+        "projectUniqueName": "C:\\Users\\Andreea\\Desktop\\Facultate\\Anul III\\Practica\\SurveyProject\\SurveysProject\\SurveysProject\\SurveysProject.csproj",
         "projectName": "SurveysProject",
-        "projectPath": "C:\\Users\\Andreea\\Desktop\\Facultate\\Anul III\\Practica\\SurveysProject\\SurveysProject\\SurveysProject.csproj",
+        "projectPath": "C:\\Users\\Andreea\\Desktop\\Facultate\\Anul III\\Practica\\SurveyProject\\SurveysProject\\SurveysProject\\SurveysProject.csproj",
         "packagesPath": "C:\\Users\\Andreea\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Andreea\\Desktop\\Facultate\\Anul III\\Practica\\SurveysProject\\SurveysProject\\obj\\",
+        "outputPath": "C:\\Users\\Andreea\\Desktop\\Facultate\\Anul III\\Practica\\SurveyProject\\SurveysProject\\SurveysProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

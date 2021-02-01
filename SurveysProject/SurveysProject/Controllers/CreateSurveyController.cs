@@ -34,13 +34,13 @@ namespace SurveysProject.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddSurvey(string title)
+        public ActionResult AddSurvey(string title)
         {
             Survey survey2 = new Survey();
             survey2.Title = title;
             int surveyid = surveyService.AddSurvey(survey2);
-
-            return Json(surveyid);
+            Survey survey = surveyService.GetSurveys()[0]; // aici faci un serviciu get survey by id
+            return View("Views/Question/Index.cshtml", survey);
         }
 
     }

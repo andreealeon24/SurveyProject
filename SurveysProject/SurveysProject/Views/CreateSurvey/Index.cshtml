@@ -7,41 +7,14 @@
 
 
 <div class="col-md-4">
-    <form asp-action="CreateSuvey" asp-route-id="Id" onsubmit="TitlePost(this);">
+    <form asp-action="AddSurvey" asp-route-id="Id">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Title" class="control-label"></label>
-            <input asp-for="Title" class="form-control" placeholder="Enter title" id="title"/>
+            <input asp-for="Title" class="form-control" placeholder="Enter title" id="title" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
 
-        <a href='' onclick="AddSurvey()" type="submit" class="btn btn-success" id="saveBtn">Next</a>
+        <input type="submit" class="btn btn-success" value="Next to Questions" />
     </form>
 </div>
-
-<script type="text/javascript">
-
-    function AddSurvey() {
-        debugger;
-        var titleInput = document.getElementById("title");
-        var title = titleInput.value;
-        var data = { title: title };
-        debugger;
-        $.ajax({
-            type: "POST",
-            url: '/CreateSurvey/AddSurvey',
-            dataType: "json",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            data: "title="+title,
-            success: function (resp) {
-                debugger;
-                window.location.href = window.location.pathname+ "/Question/Index.cshtml?id="+ resp.d,
-
-            },
-            error: function (error) {
-
-            }
-        });
-    }
-
-</script>

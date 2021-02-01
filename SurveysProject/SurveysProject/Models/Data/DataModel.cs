@@ -8,6 +8,9 @@ namespace SurveysProject.Models.Data
     public class DataModel
     {
         public Question Question { get; set; }
-        public Response Response { get; set; }
+        public QuestionOption QuestionOption { get; set; }
+        public Survey Survey { get; set; }
+
+
     }
 }
