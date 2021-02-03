@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SurveysProject.Models.Data;
+using SurveysProject.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,12 @@ namespace SurveysProject.Controllers
 {
     public class QuestionController : Controller
     {
+
+        private IQuestionService questionService;
+        public QuestionController(IQuestionService questionService)
+        {
+            this.questionService = questionService;
+        }
         public IActionResult Index()
         {
             return View();
@@ -18,17 +25,22 @@ namespace SurveysProject.Controllers
         {
             Question question = new Question();
             question.QuestionText = questionText;
-            AddQuestionOption(questionOption1);
-            AddQuestionOption(questionOption2);
-            AddQuestionOption(questionOption3);
+            questionService.AddQuestion(question);
+
+            QuestionOption option = new QuestionOption();
+            option.QuestionOptionText = questionOption1;
+            questionService.AddQuestionOption(option);
+            option.QuestionOptionText = questionOption2;
+            questionService.AddQuestionOption(option);
+            option.QuestionOptionText = questionOption3;
+            questionService.AddQuestionOption(option);
+
+
             return View("Views/Question/Index.cshtml");
         }
 
-        public void AddQuestionOption(string questionOption)
-        {
-            QuestionOption option = new QuestionOption();
-            option.QuestionOptionText = questionOption;
-        }
+
+        //id survey, id question
 
     }
 }

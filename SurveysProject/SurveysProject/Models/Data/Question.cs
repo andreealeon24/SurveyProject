@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,5 +15,7 @@ namespace SurveysProject.Models.Data
         [Column(TypeName = "nvarchar(30)")]
         public string QuestionText { get; set; }
         public virtual Survey Survey { get; set; }
+
+        public List<QuestionOption> Options { get; set; }
     }
 }

@@ -39,8 +39,11 @@ namespace SurveysProject.Controllers
             Survey survey2 = new Survey();
             survey2.Title = title;
             int surveyid = surveyService.AddSurvey(survey2);
-            Survey survey = surveyService.GetSurveys()[0]; // aici faci un serviciu get survey by id
-            return View("Views/Question/Index.cshtml", survey);
+            Survey survey = surveyService.GetSurvey(surveyid);
+
+            DataModel model = new DataModel();
+            model.Survey = survey;
+            return View("Views/Question/Index.cshtml", model);
         }
 
     }

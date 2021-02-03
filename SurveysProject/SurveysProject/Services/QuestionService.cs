@@ -1,5 +1,6 @@
 ﻿using SurveysProject.Models;
 using SurveysProject.Models.Data;
+using SurveysProject.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SurveysProject.Services
 {
-    public class QuestionService
+    public class QuestionService: IQuestionService
     {
         private MyContext context;
 
@@ -16,6 +17,25 @@ namespace SurveysProject.Services
             context.Questions.Add(question);
             context.SaveChanges();
             return question.QuestionId;
+        }
+
+        public int AddQuestionOption(QuestionOption questionOption)
+        {
+            context.QuestionOptions.Add(questionOption);
+            context.SaveChanges();
+            return questionOption.QuestionOptionId;
+        }
+
+        public List<Question> GetQuestionsForSurvey(int surveyId) 
+        {
+            List<Question> questions = context.Questions.Where(x => x.Survey.Id == surveyId).ToList();
+            return questions;
+        }
+
+        public List<QuestionOption> GetOptionsForQuestion(int questionId)
+        {
+            List<QuestionOption> questionOptions = context.QuestionOptions.Where(x => x.Question.QuestionId == questionId).ToList();
+            return questionOptions;
         }
     }
 }

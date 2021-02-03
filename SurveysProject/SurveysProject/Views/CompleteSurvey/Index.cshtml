@@ -1,36 +1,42 @@
-﻿@{
+﻿@model SurveysProject.Models.Data.DataModel
+
+@{
     ViewData["Title"] = "Complete Survey";
 }
 
 <div class="card bg-light text-dark">
-    <h1 class="card-body">Title</h1>
+    <h1 class="card-body">@Model.Survey.Title</h1>
 </div>
 <br />
+@foreach (var question in @Model.Survey.Questions)
+{
+    <h2>@question.QuestionText</h2>
+    <br />
+    <div class="form-check">
+        <div>
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio">@question.Options[0]
+            </label>
+        </div>
 
-<h2>@ViewBag.MyQuestion</h2>
+        <div>
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio">@question.Options[1]
+            </label>
+        </div>
 
+        <div>
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="optradio">@question.Options[2]
+            </label>
+        </div>
 
-<br />
-<div class="form-check">
-    <div>
-        <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="optradio">@ViewBag.MyResponse1
-        </label>
     </div>
+    <br />
+}
 
-    <div>
-        <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="optradio">@ViewBag.MyResponse2
-        </label>
-    </div>
 
-    <div>
-        <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="optradio">@ViewBag.MyResponse3
-        </label>
-    </div>
 
-</div><br />
 
 <button type="submit" class="btn btn-outline-warning">Next Question</button>
 <button type="submit" class="btn btn-outline-success" disabled>Final Submit</button>
