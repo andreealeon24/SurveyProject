@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SurveysProject.Models.Data;
+using SurveysProject.Models;
 using SurveysProject.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -21,26 +22,30 @@ namespace SurveysProject.Controllers
             return View();
         }
 
-        public ActionResult AddQuestion(string questionText, string questionOption1, string questionOption2, string questionOption3)
+        public ActionResult AddQuestion(Survey survey, string questionText, string questionOption1, string questionOption2, string questionOption3)
         {
             Question question = new Question();
-            question.QuestionText = questionText;
+            question.QuestionText = "text";
+            question.Survey= survey;
+            //???
             questionService.AddQuestion(question);
 
             QuestionOption option = new QuestionOption();
-            option.QuestionOptionText = questionOption1;
+            option.QuestionOptionText = "1";
+            option.Question.QuestionId = question.QuestionId;
+            // de 3 ori/ o data
             questionService.AddQuestionOption(option);
-            option.QuestionOptionText = questionOption2;
+            option.QuestionOptionText = "2";
+            option.Question.QuestionId = question.QuestionId;
             questionService.AddQuestionOption(option);
-            option.QuestionOptionText = questionOption3;
+            option.QuestionOptionText = "3";
+            option.Question.QuestionId = question.QuestionId;
             questionService.AddQuestionOption(option);
-
 
             return View("Views/Question/Index.cshtml");
         }
 
 
-        //id survey, id question
 
     }
 }

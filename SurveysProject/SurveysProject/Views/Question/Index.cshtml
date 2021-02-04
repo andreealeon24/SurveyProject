@@ -6,54 +6,52 @@
 }
 
 
-<div class="row">
-    <div class="col-md-12">
-        <form asp-controller="Question" asp-action="AddQuestion">
-            <!--id survey invizibil-->
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Question.QuestionText" class="control-label"></label>
-                <input asp-for="Question.QuestionText" class="form-control" placeholder="Enter question" id="questionText" />
-                <span asp-validation-for="Question.QuestionText" class="text-danger"></span>
-            </div>
+<div class="col-md-12">
+    <form asp-controller="Question" asp-action="AddQuestion" asp-route-id="Survey.Id">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Survey.Id" id="survey" />
+        <div class="form-group">
+            <label asp-for="Question.QuestionText" class="control-label"></label>
+            <input asp-for="Question.QuestionText" class="form-control" placeholder="Enter question" id="questionText" />
+            <span asp-validation-for="Question.QuestionText" class="text-danger"></span>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="QuestionOption.QuestionOptionText" class="control-label"></label>
-                <div class=" input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">1</div>
-                    </div>
-                    <input asp-for="QuestionOption.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption1" />
+        <div class="form-group">
+            <label asp-for="QuestionOption.QuestionOptionText" class="control-label"></label>
+            <div class=" input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">1</div>
                 </div>
-                <span asp-validation-for="QuestionOption.QuestionOptionText" class="text-danger"></span>
+                <input asp-for="QuestionOption.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption1" />
             </div>
+            <span asp-validation-for="QuestionOption.QuestionOptionText" class="text-danger"></span>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="QuestionOption.QuestionOptionText" class="control-label"></label>
-                <div class=" input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">2</div>
-                    </div>
-                    <input asp-for="QuestionOption.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption2" />
+        <div class="form-group">
+            <label asp-for="QuestionOption.QuestionOptionText" class="control-label"></label>
+            <div class=" input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">2</div>
                 </div>
-                <span asp-validation-for="QuestionOption.QuestionOptionText" class="text-danger"></span>
+                <input asp-for="QuestionOption.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption2" />
             </div>
+            <span asp-validation-for="QuestionOption.QuestionOptionText" class="text-danger"></span>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="QuestionOption.QuestionOptionText" class="control-label"></label>
-                <div class=" input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">3</div>
-                    </div>
-                    <input asp-for="QuestionOption.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption3" />
+        <div class="form-group">
+            <label asp-for="QuestionOption.QuestionOptionText" class="control-label"></label>
+            <div class=" input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">3</div>
                 </div>
-                <span asp-validation-for="QuestionOption.QuestionOptionText" class="text-danger"></span>
+                <input asp-for="QuestionOption.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption3" />
             </div>
+            <span asp-validation-for="QuestionOption.QuestionOptionText" class="text-danger"></span>
+        </div>
 
-            <input type="submit" class="btn btn-warning" value="Next Question" />
-            //info submit next question
-            <input class="btn btn-success" id="saveBtn" value="Final Submit" />
-            //info final submit
-        </form>
+        <input type="submit" class="btn btn-warning" value="Next Question" />
+        //info submit next question
+        <input class="btn btn-success" id="saveBtn" value="Final Submit" />
+        //info final submit
+    </form>
     </div>
-</div>

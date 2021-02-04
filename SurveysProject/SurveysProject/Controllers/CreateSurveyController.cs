@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver.Core.Configuration;
 using SurveysProject.Models;
 using SurveysProject.Models.Data;
 using SurveysProject.Services;
@@ -28,10 +27,6 @@ namespace SurveysProject.Controllers
             return View();
         }
 
-        public IActionResult CreateQuestion()
-        {
-            return View();
-        }
 
         [HttpPost]
         public ActionResult AddSurvey(string title)

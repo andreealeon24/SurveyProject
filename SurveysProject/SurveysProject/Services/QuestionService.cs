@@ -1,16 +1,16 @@
 ﻿using SurveysProject.Models;
 using SurveysProject.Models.Data;
 using SurveysProject.Services.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SurveysProject.Services
 {
-    public class QuestionService: IQuestionService
+    public class QuestionService:IQuestionService
     {
         private MyContext context;
+
+        public QuestionService(MyContext context) => this.context = context;
 
         public int AddQuestion(Question question)
         {
