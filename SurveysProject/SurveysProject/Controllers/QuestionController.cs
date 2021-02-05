@@ -22,10 +22,10 @@ namespace SurveysProject.Controllers
             return View();
         }
 
-        public ActionResult AddQuestion(Survey survey, string questionText, string questionOption1, string questionOption2, string questionOption3)
+        public ActionResult AddQuestion(Survey survey, Question question1, QuestionOption questionOption1, QuestionOption questionOption2, QuestionOption questionOption3)
         {
             Question question = new Question();
-            question.QuestionText = "text";
+            //question.Question= question1;
             question.Survey= survey;
             //???
             questionService.AddQuestion(question);
