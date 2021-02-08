@@ -2,7 +2,7 @@
 
 namespace SurveysProject.Migrations
 {
-    public partial class Initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace SurveysProject.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Title = table.Column<string>(type: "nvarchar(30)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,7 +25,7 @@ namespace SurveysProject.Migrations
                 {
                     QuestionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Text = table.Column<string>(type: "nvarchar(30)", nullable: false),
                     SurveyId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -45,6 +45,7 @@ namespace SurveysProject.Migrations
                 {
                     QuestionOptionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    QuestionOptionText = table.Column<string>(type: "nvarchar(30)", nullable: false),
                     QuestionId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -64,7 +65,6 @@ namespace SurveysProject.Migrations
                 {
                     ResponseId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     QuestionId = table.Column<int>(type: "int", nullable: true),
                     SurveyId = table.Column<int>(type: "int", nullable: true),
                     QuestionOptionId = table.Column<int>(type: "int", nullable: true)

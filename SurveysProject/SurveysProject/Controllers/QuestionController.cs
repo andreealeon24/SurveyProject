@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace SurveysProject.Controllers
 {
@@ -22,30 +23,39 @@ namespace SurveysProject.Controllers
             return View();
         }
 
-        public ActionResult AddQuestion(Survey survey, Question question1, QuestionOption questionOption1, QuestionOption questionOption2, QuestionOption questionOption3)
+        [HttpPost]
+        public ActionResult AddQuestion(DataModel data)
         {
             Question question = new Question();
-            //question.Question= question1;
-            question.Survey= survey;
-            //???
+            question.Survey = data.Survey;
+            question.Text = data.Question.Text;
             questionService.AddQuestion(question);
 
-            QuestionOption option = new QuestionOption();
-            option.QuestionOptionText = "1";
-            option.Question.QuestionId = question.QuestionId;
-            // de 3 ori/ o data
-            questionService.AddQuestionOption(option);
-            option.QuestionOptionText = "2";
-            option.Question.QuestionId = question.QuestionId;
-            questionService.AddQuestionOption(option);
-            option.QuestionOptionText = "3";
-            option.Question.QuestionId = question.QuestionId;
-            questionService.AddQuestionOption(option);
+            QuestionOption questionOption1 = new QuestionOption();
+            questionOption1.Question = question;
+            questionOption1.QuestionOptionText = data.QuestionOption1.QuestionOptionText;
+            questionService.AddQuestionOption(questionOption1);
 
-            return View("Views/Question/Index.cshtml");
+            QuestionOption questionOption2 = new QuestionOption();
+            questionOption2.Question = question;
+            questionOption2.QuestionOptionText = data.QuestionOption2.QuestionOptionText;
+            questionService.AddQuestionOption(questionOption2);
+
+
+            QuestionOption questionOption3 = new QuestionOption();
+            questionOption3.Question = question;
+            questionOption3.QuestionOptionText = data.QuestionOption3.QuestionOptionText;
+            questionService.AddQuestionOption(questionOption3);
+
+
+            DataModel model = new DataModel();
+            model.Survey = data.Survey;
+
+            ModelState.Clear();
+
+
+            return View("Views/Question/Index.cshtml", model);
         }
 
-
-
-    }
+}
 }

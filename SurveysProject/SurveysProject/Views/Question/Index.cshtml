@@ -7,51 +7,57 @@
 
 
 <div class="col-md-12">
-    <form asp-controller="Question" asp-action="AddQuestion" asp-route-id="Survey.Id">
+    <form asp-controller="Question" asp-action="AddQuestion" asp-route-id="Id">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Survey.Id" id="survey" />
         <div class="form-group">
-            <label asp-for="Question.QuestionText" class="control-label"></label>
-            <input asp-for="Question.QuestionText" class="form-control" placeholder="Enter question" id="question1" />
-            <span asp-validation-for="Question.QuestionText" class="text-danger"></span>
+            <label asp-for="Question.Text" class="control-label"></label>
+            <input asp-for="Question.Text" class="form-control" placeholder="Enter question" id="question1" />
+            <span asp-validation-for="Question.Text" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="QuestionOption.QuestionOptionText" class="control-label"></label>
+            <label asp-for="QuestionOption1.QuestionOptionText" class="control-label"></label>
             <div class=" input-group">
                 <div class="input-group-prepend">
                     <div class="input-group-text">1</div>
                 </div>
-                <input asp-for="QuestionOption.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption1" />
+                <input asp-for="QuestionOption1.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption1" />
             </div>
-            <span asp-validation-for="QuestionOption.QuestionOptionText" class="text-danger"></span>
+            <span asp-validation-for="QuestionOption1.QuestionOptionText" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="QuestionOption.QuestionOptionText" class="control-label"></label>
+            <label asp-for="QuestionOption2.QuestionOptionText" class="control-label"></label>
             <div class=" input-group">
                 <div class="input-group-prepend">
                     <div class="input-group-text">2</div>
                 </div>
-                <input asp-for="QuestionOption.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption2" />
+                <input asp-for="QuestionOption2.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption2" />
             </div>
-            <span asp-validation-for="QuestionOption.QuestionOptionText" class="text-danger"></span>
+            <span asp-validation-for="QuestionOption2.QuestionOptionText" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="QuestionOption.QuestionOptionText" class="control-label"></label>
+            <label asp-for="QuestionOption3.QuestionOptionText" class="control-label"></label>
             <div class=" input-group">
                 <div class="input-group-prepend">
                     <div class="input-group-text">3</div>
                 </div>
-                <input asp-for="QuestionOption.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption3" />
+                <input asp-for="QuestionOption3.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption3" />
             </div>
-            <span asp-validation-for="QuestionOption.QuestionOptionText" class="text-danger"></span>
+            <span asp-validation-for="QuestionOption3.QuestionOptionText" class="text-danger"></span>
         </div>
 
-        <input type="submit" class="btn btn-warning" value="Next Question" />
-        //info submit next question
-        <input class="btn btn-success" id="saveBtn" value="Final Submit" />
-        //info final submit
+        <input type="submit" class="btn btn-warning" value="Insert Question" />
+
+        <!-- <a class="btn btn-success" id="saveBtn" value="Finish Survey" />  -->
     </form>
     </div>
+
+@*<script type="text/javascript">
+    function RemoveText() {
+        var questionText = document.getElementById("question1");
+        questionText.value = "";
+    }
+</script>*@

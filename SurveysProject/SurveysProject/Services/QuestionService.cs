@@ -15,6 +15,7 @@ namespace SurveysProject.Services
         public int AddQuestion(Question question)
         {
             context.Questions.Add(question);
+            context.Entry(question.Survey).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
             context.SaveChanges();
             return question.QuestionId;
         }
@@ -22,6 +23,7 @@ namespace SurveysProject.Services
         public int AddQuestionOption(QuestionOption questionOption)
         {
             context.QuestionOptions.Add(questionOption);
+            context.Entry(questionOption.Question).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
             context.SaveChanges();
             return questionOption.QuestionOptionId;
         }

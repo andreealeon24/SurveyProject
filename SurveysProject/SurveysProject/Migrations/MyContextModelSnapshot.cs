@@ -17,7 +17,7 @@ namespace SurveysProject.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.1");
+                .HasAnnotation("ProductVersion", "5.0.2");
 
             modelBuilder.Entity("SurveysProject.Models.Data.Question", b =>
                 {
@@ -30,7 +30,8 @@ namespace SurveysProject.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("QuestionId");
 
@@ -48,6 +49,10 @@ namespace SurveysProject.Migrations
 
                     b.Property<int?>("QuestionId")
                         .HasColumnType("int");
+
+                    b.Property<string>("QuestionOptionText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("QuestionOptionId");
 
@@ -72,9 +77,6 @@ namespace SurveysProject.Migrations
                     b.Property<int?>("SurveyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("ResponseId");
 
                     b.HasIndex("QuestionId");
@@ -94,7 +96,8 @@ namespace SurveysProject.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -104,7 +107,7 @@ namespace SurveysProject.Migrations
             modelBuilder.Entity("SurveysProject.Models.Data.Question", b =>
                 {
                     b.HasOne("SurveysProject.Models.Survey", "Survey")
-                        .WithMany()
+                        .WithMany("Questions")
                         .HasForeignKey("SurveyId");
 
                     b.Navigation("Survey");
@@ -113,7 +116,7 @@ namespace SurveysProject.Migrations
             modelBuilder.Entity("SurveysProject.Models.Data.QuestionOption", b =>
                 {
                     b.HasOne("SurveysProject.Models.Data.Question", "Question")
-                        .WithMany()
+                        .WithMany("Options")
                         .HasForeignKey("QuestionId");
 
                     b.Navigation("Question");
@@ -138,6 +141,16 @@ namespace SurveysProject.Migrations
                     b.Navigation("QuestionOption");
 
                     b.Navigation("Survey");
+                });
+
+            modelBuilder.Entity("SurveysProject.Models.Data.Question", b =>
+                {
+                    b.Navigation("Options");
+                });
+
+            modelBuilder.Entity("SurveysProject.Models.Survey", b =>
+                {
+                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }

@@ -29,6 +29,7 @@ namespace SurveysProject.Controllers
 
         public ActionResult GetSurvey(int surveyId)
         {
+            DataModel model = new DataModel();
             Survey survey = surveyService.GetSurvey(surveyId);
             List<Question> questions = questionService.GetQuestionsForSurvey(surveyId);
             survey.Questions = new List<Question>();
@@ -40,7 +41,8 @@ namespace SurveysProject.Controllers
                 survey.Questions.Add(question);
             }
 
-            return View("Views/CompleteSurvey/Index.cshtml", survey);
+            model.Survey = survey;
+            return View("Views/CompleteSurvey/Index.cshtml", model);
 
             
         }
