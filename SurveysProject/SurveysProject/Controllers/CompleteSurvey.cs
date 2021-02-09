@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using SurveysProject.Models;
 using SurveysProject.Services.Interfaces;
 using SurveysProject.Models.Data;
@@ -16,11 +14,14 @@ namespace SurveysProject.Controllers
 
         private IQuestionService questionService;
 
-        public CompleteSurvey(ISurveyService surveyService, IQuestionService questionService)
+        private IResponseService responseService;
+
+
+        public CompleteSurvey(ISurveyService surveyService, IQuestionService questionService, IResponseService responseService)
         {
             this.surveyService = surveyService;
             this.questionService = questionService;
-            
+            this.responseService = responseService;
         }
         public IActionResult Index()
         {
@@ -45,6 +46,19 @@ namespace SurveysProject.Controllers
             return View("Views/CompleteSurvey/Index.cshtml", model);
 
             
+        }
+
+        public ActionResult AddResponse(Response response)
+        {
+            Response response1 = new Response();
+            DataModel model = new DataModel();
+            response1.Question = response.Question;
+            response1.QuestionOption = response.QuestionOption;
+            response1.Survey = response.Survey;
+            responseService.AddResponse(response1);
+
+            model.Survey = response.Survey;
+            return View("Views/CompleteSurvey/Index.cshtml", model);
         }
     }
 }

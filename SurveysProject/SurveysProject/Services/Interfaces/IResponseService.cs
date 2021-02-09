@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SurveysProject.Services.Interfaces
 {
-    interface IResponseService
+    public interface IResponseService
     {
 
         int AddResponse(Response response);

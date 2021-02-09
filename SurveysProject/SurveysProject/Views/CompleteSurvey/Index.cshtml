@@ -15,30 +15,29 @@
     <div class="form-check">
         <div>
             <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio">@question.Options[0]
+                <input type="radio" class="form-check-input" name="optradio">@question.Options[0].QuestionOptionText
             </label>
         </div>
 
         <div>
             <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio">@question.Options[1]
+                <input type="radio" class="form-check-input" name="optradio">@question.Options[1].QuestionOptionText
             </label>
         </div>
 
         <div>
             <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio">@question.Options[2]
+                <input type="radio" class="form-check-input" name="optradio">@question.Options[2].QuestionOptionText
             </label>
         </div>
 
     </div>
     <br />
+    <button type="submit" class="btn btn-outline-warning">Next Question</button>
 }
 
 
 
-
-<button type="submit" class="btn btn-outline-warning">Next Question</button>
 <button type="submit" class="btn btn-outline-success" disabled>Final Submit</button>
 
 

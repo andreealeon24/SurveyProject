@@ -41,5 +41,6 @@ namespace SurveysProject.Controllers
             return View("Views/Question/Index.cshtml", model);
         }
 
+    
     }
 }
