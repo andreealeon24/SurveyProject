@@ -1,4 +1,4 @@
-﻿@model SurveysProject.Models.Data.DataModel
+﻿@model SurveysProject.Models.ViewModels.ResponseQuestion
 
 @{
     ViewData["Title"] = "Complete Survey";
@@ -9,36 +9,18 @@
 </div>
 <br />
 
-<div class="col-md-8">
-        @foreach (var question in @Model.Survey.Questions)
-        {
-            <h2 id="question">@question.Text</h2>
-            <br />
-            <div class="form-check">
-                <div>
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input" id="opt1">@question.Options[0].QuestionOptionText
-                    </label>
-                </div>
+<br />
 
-                <div>
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input" id="optradio">@question.Options[1].QuestionOptionText
-                    </label>
-                </div>
+@using (Html.BeginForm("AddResponse", "CompleteSurvey", new { surveyId=Model.Survey.Id, page=ViewBag.page}))
+{
+   
+    <h2>@Model.Question.Text</h2>
+    foreach (var item in Model.Question.Options)
+    {
+        <div> @Html.RadioButtonFor(s => s.SelectedOptionId, item.QuestionOptionId) @item.QuestionOptionText</div>
+    }
 
-                <div>
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input" id="optradio">@question.Options[2].QuestionOptionText
-                    </label>
-                </div>
-
-            </div>
-            <br />
-        }
-
-        <a href="@Url.Action("AddResponse", "CompleteSurvey")" type="button" class="btn btn-outline-warning">Insert Response</a>
-
-</div>
-
+    //asigura-te ca a fost selectata optiunea
+    <input type="submit" value="Next"/>
+}
 
