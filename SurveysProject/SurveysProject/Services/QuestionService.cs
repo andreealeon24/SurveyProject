@@ -39,5 +39,10 @@ namespace SurveysProject.Services
             List<QuestionOption> questionOptions = context.QuestionOptions.Where(x => x.Question.QuestionId == questionId).ToList();
             return questionOptions;
         }
+
+        public int GetCountQuestion(int surveyId)
+        {
+            return context.Questions.Where(x=> x.Survey.Id == surveyId).Count();
+        }
     }
 }

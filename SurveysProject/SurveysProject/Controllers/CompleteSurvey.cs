@@ -30,27 +30,33 @@ namespace SurveysProject.Controllers
         public IActionResult Index(int surveyId)
         {
             Survey survey = surveyService.GetSurvey(surveyId);
-
-            // verifica daca survey-ul are intrebari (si optiuni), daca nu, vei avea eroare
-
-
-            List<Question> questions = questionService.GetQuestionsForSurvey(surveyId).Take(1).ToList();
-            survey.Questions = new List<Question>();
-            foreach (Question question in questions)
+            if (questionService.GetCountQuestion(surveyId) > 0)
             {
-                List<QuestionOption> options = questionService.GetOptionsForQuestion(question.QuestionId);
-                question.Options = new List<QuestionOption>();
-                question.Options.AddRange(options);
-                survey.Questions.Add(question);
+                // verifica daca survey-ul are intrebari (si optiuni), daca nu, vei avea eroare
+
+
+                List<Question> questions = questionService.GetQuestionsForSurvey(surveyId).Take(1).ToList();
+                survey.Questions = new List<Question>();
+                foreach (Question question in questions)
+                {
+                    List<QuestionOption> options = questionService.GetOptionsForQuestion(question.QuestionId);
+                    question.Options = new List<QuestionOption>();
+                    question.Options.AddRange(options);
+                    survey.Questions.Add(question);
+                }
+                ResponseQuestion respQ = new ResponseQuestion()
+                {
+                    Survey = survey,
+                    Question = questions[0],
+                };
+
+                ViewBag.page = 0;
+                return View("Views/CompleteSurvey/Index.cshtml", respQ);
             }
-            ResponseQuestion respQ = new ResponseQuestion()
+            else
             {
-                Survey = survey,
-                Question = questions[0],
-            };
-
-            ViewBag.page = 0;
-            return View("Views/CompleteSurvey/Index.cshtml", respQ);
+                return View("Views/Home/Index.cshtml");
+            }
         }
 
         public ActionResult AddResponse(int surveyId, int page, ResponseQuestion response)
@@ -58,6 +64,11 @@ namespace SurveysProject.Controllers
             Survey survey = surveyService.GetSurvey(surveyId);
             // get option by id (response.SelectedoptionId) si tot ce iti trebuie
             // creeaza response si adauga in bd
+            Response responseQuestion = new Response();
+            responseQuestion.Survey.Id = surveyId;
+            responseQuestion.Question = response.Question;
+            responseQuestion.QuestionOption.QuestionOptionId = response.SelectedOptionId;
+            responseService.AddResponse(responseQuestion);
 
             page++;
             ViewBag.page = page;

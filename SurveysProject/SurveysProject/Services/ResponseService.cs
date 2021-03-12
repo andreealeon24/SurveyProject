@@ -17,6 +17,7 @@ namespace SurveysProject.Services
         public int AddResponse(Response response)
         {
             context.Responses.Add(response);
+            context.Entry(response.QuestionOption.QuestionOptionId).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
             context.SaveChanges();
             return response.ResponseId;
         }
