@@ -10,5 +10,6 @@ namespace SurveysProject.Services.Interfaces
     {
 
         int AddResponse(Response response);
+
     }
 }

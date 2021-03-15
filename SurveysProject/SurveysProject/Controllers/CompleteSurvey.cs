@@ -62,12 +62,11 @@ namespace SurveysProject.Controllers
         public ActionResult AddResponse(int surveyId, int page, ResponseQuestion response)
         {
             Survey survey = surveyService.GetSurvey(surveyId);
-            // get option by id (response.SelectedoptionId) si tot ce iti trebuie
-            // creeaza response si adauga in bd
+            QuestionOption questionOption = questionService.GetOptionById(response.SelectedOptionId);
             Response responseQuestion = new Response();
-            responseQuestion.Survey.Id = surveyId;
-            responseQuestion.Question = response.Question;
-            responseQuestion.QuestionOption.QuestionOptionId = response.SelectedOptionId;
+            responseQuestion.Survey = survey;
+            responseQuestion.QuestionOption= questionOption;
+            responseQuestion.Question = questionOption.Question;
             responseService.AddResponse(responseQuestion);
 
             page++;

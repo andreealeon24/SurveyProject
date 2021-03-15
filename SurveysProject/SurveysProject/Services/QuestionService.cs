@@ -1,4 +1,5 @@
-﻿using SurveysProject.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SurveysProject.Models;
 using SurveysProject.Models.Data;
 using SurveysProject.Services.Interfaces;
 using System.Collections.Generic;
@@ -43,6 +44,12 @@ namespace SurveysProject.Services
         public int GetCountQuestion(int surveyId)
         {
             return context.Questions.Where(x=> x.Survey.Id == surveyId).Count();
+        }
+
+        public QuestionOption GetOptionById(int selectedOptionId)
+        {
+            QuestionOption questionOption = context.QuestionOptions.Where(x => x.QuestionOptionId == selectedOptionId).Include(x => x.Question).FirstOrDefault();
+            return questionOption;
         }
     }
 }
