@@ -27,6 +27,11 @@ namespace SurveysProject.Controllers
             this.responseService = responseService;
         }
 
+        public IActionResult CompletedSuccessfully()
+        {
+            return View();
+        }
+
         public IActionResult Index(int surveyId)
         {
             Survey survey = surveyService.GetSurvey(surveyId);
@@ -78,7 +83,7 @@ namespace SurveysProject.Controllers
             if (questions.Count <= 0)
             {
                 List<Survey> surveys = surveyService.GetSurveys();
-                return View("Views/Home/Index.cshtml", surveys);
+                return View("Views/CompleteSurvey/CompletedSuccessfully.cshtml", surveys);
                 // sau poti crea o pagina cu o imagine cu bifa si un mesaj cu The survey was successfully completed!
             }
 

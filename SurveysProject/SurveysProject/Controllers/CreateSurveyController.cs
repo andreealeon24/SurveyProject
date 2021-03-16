@@ -27,6 +27,11 @@ namespace SurveysProject.Controllers
             return View();
         }
 
+        public IActionResult CreatedSuccessfully()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public ActionResult AddSurvey(string title)

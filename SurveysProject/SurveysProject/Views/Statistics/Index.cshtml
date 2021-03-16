@@ -4,16 +4,16 @@
     ViewData["Title"] = "Statistics";
 }
 
-<h1>Statistics</h1>
+<h1> Statistics</h1>
 
-<div class="form-group">
+<div class="col-md-8">
     <label for="survey">Survey:</label>
     <select class="form-control" id="survey">
         @foreach (var item in Model)
         {
             <option>@item.Title</option>
         }
-        </select>
+    </select>
 </div>
-
-<button type="button" class="btn btn-danger">Search</button>
+<br />
+<button style="margin-left:40px"type="button" class="btn btn-danger">Search</button>
