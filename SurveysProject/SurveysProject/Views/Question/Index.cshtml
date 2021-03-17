@@ -1,9 +1,9 @@
 ﻿@model SurveysProject.Models.Data.DataModel
 
 
-@{
-    ViewData["Title"] = "Create Survey";
-}
+<head>
+    <title>@ViewData["Title"] Created Survey</title>
+</head>
 
 
 <div class="col-md-12">
@@ -20,7 +20,7 @@
             <label asp-for="QuestionOption1.QuestionOptionText" class="control-label"></label>
             <div class=" input-group">
                 <div class="input-group-prepend">
-                    <div class="input-group-text">1</div>
+                    <div class="input-group-text" style="color: green">1</div>
                 </div>
                 <input asp-for="QuestionOption1.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption1" />
             </div>
@@ -29,9 +29,9 @@
 
         <div class="form-group">
             <label asp-for="QuestionOption2.QuestionOptionText" class="control-label"></label>
-            <div class=" input-group">
+            <div class="input-group">
                 <div class="input-group-prepend">
-                    <div class="input-group-text">2</div>
+                    <div class="input-group-text" style="color:green">2</div>
                 </div>
                 <input asp-for="QuestionOption2.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption2" />
             </div>
@@ -42,47 +42,24 @@
             <label asp-for="QuestionOption3.QuestionOptionText" class="control-label"></label>
             <div class=" input-group">
                 <div class="input-group-prepend">
-                    <div class="input-group-text">3</div>
+                    <div class="input-group-text" style="color:green">3</div>
                 </div>
                 <input asp-for="QuestionOption3.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption3" />
             </div>
             <span asp-validation-for="QuestionOption3.QuestionOptionText" class="text-danger"></span>
         </div>
 
-        <input type="submit" class="btn btn-outline-success" value="Insert Question" />
-        <a href="@Url.Action("CreatedSuccessfully", "CreateSurvey")" type="button" class="btn btn-success">Finish Survey</a>
+        <input type="submit" class="btn btn-success" value="Insert Question" />
+        <a href="@Url.Action("CreatedSuccessfully", "CreateSurvey")" type="button" class="btn btn-outline-success">Finish Survey</a>
     </form>
 </div>
 
-<!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Finish Survey</button>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>After this action the information on this page will be lost.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Finish Survey</button>
-                    </div>
-                </div>
-            </div>
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body">
+        You
+        <div class="mt-2 pt-2 border-top">
+            <button type="button" class="btn btn-primary btn-sm">Take action</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
         </div>
-    </form>
+    </div>
 </div>
-
-
-
-<script type="text/javascript">
-    var myModal = document.getElementById('myModal')
-    var myInput = document.getElementById('myInput')
-
-    myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
-    })
-</script>
-           -->

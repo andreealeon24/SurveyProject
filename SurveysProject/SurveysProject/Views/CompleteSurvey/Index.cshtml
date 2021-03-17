@@ -4,23 +4,23 @@
     ViewData["Title"] = "Complete Survey";
 }
 
-<div class="card bg-light text-dark">
-    <h1 class="card-body" id="survey">@Model.Survey.Title</h1>
+<div class="card text-white bg-success small" style="max-width: 40rem;">
+    <h2 class="card-body" id="survey">@Model.Survey.Title</h2>
 </div>
 <br />
-
 <br />
 
 @using (Html.BeginForm("AddResponse", "CompleteSurvey", new { surveyId=Model.Survey.Id, page=ViewBag.page}))
 {
    
-    <h2>@Model.Question.Text</h2>
+    <h3>@Model.Question.Text</h3>
     foreach (var item in Model.Question.Options)
     {
         <div> @Html.RadioButtonFor(s => s.SelectedOptionId, item.QuestionOptionId) @item.QuestionOptionText</div>
     }
 
     //asigura-te ca a fost selectata optiunea
-    <input type="submit" value="Next"/>
+    <br />
+    <input type="submit" class="btn btn-success"value="Next"/>
 }
 
