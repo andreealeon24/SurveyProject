@@ -19,5 +19,6 @@ namespace SurveysProject.Services.Interfaces
         int GetCountQuestion(int surveyId);
 
         QuestionOption GetOptionById(int selectedOptionId);
+        string GetQuestionTextById(int questionId);
     }
 }

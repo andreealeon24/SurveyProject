@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using SurveysProject.Models;
 using SurveysProject.Services.Interfaces;
+using SurveysProject.Models;
+using SurveysProject.Models.ViewModels;
 
 namespace SurveysProject.Controllers
 {
@@ -12,14 +10,43 @@ namespace SurveysProject.Controllers
     {
 
         private ISurveyService surveyService;
-        public StatisticsController(ISurveyService surveyService)
+
+        private IStatisticsService statisticsService;
+
+        private IQuestionService questionService;
+
+        public StatisticsController(ISurveyService surveyService, IQuestionService questionService, IStatisticsService statisticsService)
         {
             this.surveyService = surveyService;
+            this.statisticsService = statisticsService;
+            this.questionService = questionService;
         }
         public IActionResult Index()
         {
             List<Survey> surveys = surveyService.GetSurveys();
             return View(surveys);
         }
+
+        public IActionResult Results()
+        {
+            return View();
+        }
+
+
+        public ActionResult ShowResults(int surveyId)
+        {
+            StatisticsModel model = new StatisticsModel();
+            model.Survey = surveyService.GetSurvey(surveyId);
+            model.NumberOfResponses = statisticsService.GetNumerOfResponsesBySurvey(surveyId);
+
+            model.Questions = questionService.GetQuestionsForSurvey(surveyId);
+            foreach(var question in model.Questions)
+            {
+                question.Options = questionService.GetOptionsForQuestion(question.QuestionId);
+            }
+            //numar de raspunsuri ptr fiecare optiune
+            return View("Results.cshtml", model);
+        }
+
     }
 }

@@ -474,3 +474,5 @@ C:\Users\Andreea\Desktop\Facultate\Anul III\Practica\SurveyProject\SurveysProjec
 C:\Users\Andreea\Desktop\Facultate\Anul III\Practica\SurveyProject\SurveysProject\SurveysProject\obj\Debug\net5.0\SurveysProject.csprojAssemblyReference.cache
 C:\Users\Andreea\Desktop\Facultate\Anul III\Practica\SurveyProject\SurveysProject\SurveysProject\obj\Debug\net5.0\Razor\Views\CompleteSurvey\CompletedSuccessfully.cshtml.g.cs
 C:\Users\Andreea\Desktop\Facultate\Anul III\Practica\SurveyProject\SurveysProject\SurveysProject\obj\Debug\net5.0\Razor\Views\CreateSurvey\CreatedSuccessfully.cshtml.g.cs
+C:\Users\Andreea\Desktop\Facultate\Anul III\Practica\SurveyProject\SurveysProject\SurveysProject\obj\Debug\net5.0\Razor\Views\Statistics\Results.cshtml.g.cs
+C:\Users\Andreea\Desktop\Facultate\Anul III\Practica\SurveyProject\SurveysProject\SurveysProject\obj\Debug\net5.0\Razor\Views\Question\QuestionOption.cshtml.g.cs

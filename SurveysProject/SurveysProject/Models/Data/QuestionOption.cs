@@ -15,5 +15,7 @@ namespace SurveysProject.Models.Data
         [Column(TypeName = "nvarchar(30)")]
         public string QuestionOptionText { get; set; }
         public virtual Question Question { get; set; }
+
+        //int NumberOfSelection {get; set;}
     }
 }

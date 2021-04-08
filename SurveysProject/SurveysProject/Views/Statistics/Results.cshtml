@@ -1,0 +1,45 @@
+﻿@model SurveysProject.Models.ViewModels.StatisticsModel
+
+@{
+    ViewData["Title"] = "Statistics results";
+}
+
+<body>
+
+    <h2 id="survey">@Model.Survey.Title : @Model.NumberOfResponses</h2>
+
+    @foreach (var question in Model.Questions)
+    { <h2 id="question">@question.Text</h2>
+
+    <table class="table">
+        <thead>
+            <tr class="text-white" style="background-color: #4d90ba ">
+
+                <th>
+                    Options
+                </th>
+                <th>
+                    Responses
+                </th>
+            </tr>
+        </thead>
+
+        @foreach (var option in question.Options)
+        {
+        <tbody>
+            <tr>
+                <td>
+                    @option.QuestionOptionText
+                </td>
+
+                <td>
+                    10
+                </td>
+            </tr>
+        </tbody>
+        }
+    </table>
+    }
+
+</body>
+

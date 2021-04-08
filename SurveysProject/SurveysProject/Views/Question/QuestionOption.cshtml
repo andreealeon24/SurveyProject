@@ -1,0 +1,39 @@
+﻿@model SurveysProject.Models.ViewModels.DataModel
+
+
+<head>
+    <title>@ViewData["Title"] Created Survey</title>
+</head>
+
+
+<div class="col-md-12">
+    <form asp-controller="Question" asp-action="AddQuestionOption" asp-route-id="Id">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <input type="hidden" asp-for="Survey.Id" id="survey" />
+            <label asp-for="Survey.Title" class="control-label"></label>
+            <input asp-for="Survey.Title" class="form-control" value="@Model.Survey.Title" id="survey" disabled/>
+
+            <input type="hidden" asp-for="Question.QuestionId" />
+            <label asp-for="Question.Text" class="control-label"></label>
+            <input asp-for="Question.Text" class="form-control" value="@Model.Question.Text" id="question" disabled />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="QuestionOption.QuestionOptionText" class="control-label"></label>
+            <div class=" input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">1</div>
+                </div>
+                <input asp-for="QuestionOption.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption" />
+            </div>
+            <span asp-validation-for="QuestionOption.QuestionOptionText" class="text-danger"></span>
+        </div>
+
+        <input type="submit" class="btn btn-info" value="Insert Question Option" />
+        <a href="@Url.Action("Index", "Question")" type="button" class="btn btn-info">Add New Question</a>
+        <a href="@Url.Action("CreatedSuccessfully", "CreateSurvey")" type="button" class="btn btn-outline-info">Finish Survey</a>
+    </form>
+</div>
+
+<!--nu imi raman salvate titlu survey si question text, id-urile da-->

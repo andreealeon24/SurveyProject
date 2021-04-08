@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<SurveysProject.Models.Survey>
 
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -8,9 +9,10 @@
 
     <table class="table">
         <thead>
-            <tr style="background-image: linear-gradient(120deg, chartreuse, green)">
+            <tr class="text-white" style="background-color: #4d90ba ">
+                
                 <th>
-                    @Html.DisplayNameFor(model=> model.Title)
+                    @Html.DisplayNameFor(model => model.Title)
                 </th>
                 <th>
 
@@ -26,7 +28,7 @@
                     </td>
 
                     <td>
-                        <a href="@Url.Action("Index", "CompleteSurvey", new {surveyId= item.Id})" class="btn btn-outline-success">Complete</a>
+                        <a href="@Url.Action("Index", "CompleteSurvey", new {surveyId= item.Id})" class="btn btn-outline-info">Complete</a>
                     </td>
                 </tr>
             }

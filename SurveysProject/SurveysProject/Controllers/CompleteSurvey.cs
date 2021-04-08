@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using SurveysProject.Models;
 using SurveysProject.Services.Interfaces;
 using SurveysProject.Models.Data;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using SurveysProject.Models.ViewModels;
+using SurveysProject.Models;
 
 namespace SurveysProject.Controllers
 {

@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SurveysProject.Models.Data;
-using SurveysProject.Models;
+using SurveysProject.Models.ViewModels;
 using SurveysProject.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+
 
 namespace SurveysProject.Controllers
 {
@@ -14,11 +10,18 @@ namespace SurveysProject.Controllers
     {
 
         private IQuestionService questionService;
-        public QuestionController(IQuestionService questionService)
+        private ISurveyService surveyService;
+        public QuestionController(IQuestionService questionService, ISurveyService surveyService)
         {
             this.questionService = questionService;
+            this.surveyService = surveyService;
         }
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult QuestionOption()
         {
             return View();
         }
@@ -31,31 +34,40 @@ namespace SurveysProject.Controllers
             question.Text = data.Question.Text;
             questionService.AddQuestion(question);
 
-            QuestionOption questionOption1 = new QuestionOption();
-            questionOption1.Question = question;
-            questionOption1.QuestionOptionText = data.QuestionOption1.QuestionOptionText;
-            questionService.AddQuestionOption(questionOption1);
-
-            QuestionOption questionOption2 = new QuestionOption();
-            questionOption2.Question = question;
-            questionOption2.QuestionOptionText = data.QuestionOption2.QuestionOptionText;
-            questionService.AddQuestionOption(questionOption2);
-
-
-            QuestionOption questionOption3 = new QuestionOption();
-            questionOption3.Question = question;
-            questionOption3.QuestionOptionText = data.QuestionOption3.QuestionOptionText;
-            questionService.AddQuestionOption(questionOption3);
-
+            data.Survey.Title = surveyService.GetSurveyTitleById(data.Survey.Id);
 
             DataModel model = new DataModel();
             model.Survey = data.Survey;
+            model.Question = question;
+
+            return View("Views/Question/QuestionOption.cshtml", model);
+        }
+
+        public ActionResult AddQuestionOption(DataModel data)
+        {
+          
+            QuestionOption questionOption = new QuestionOption();
+            questionOption.Question = data.Question;
+            questionOption.QuestionOptionText = data.QuestionOption.QuestionOptionText;
+            questionService.AddQuestionOption(questionOption);
+
+
+            string title= surveyService.GetSurveyTitleById(data.Survey.Id);
+            data.Survey.Title = title;
+
+            string text= questionService.GetQuestionTextById(data.Question.QuestionId);
+            data.Question.Text = text;
+
+            DataModel model = new DataModel();
+            model.Survey= data.Survey;
+            model.Question = data.Question;
 
             ModelState.Clear();
 
 
-            return View("Views/Question/Index.cshtml", model);
+            return View("Views/Question/QuestionOption.cshtml", model);
         }
 
-}
+
+    }
 }

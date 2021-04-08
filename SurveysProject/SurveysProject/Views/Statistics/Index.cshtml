@@ -11,9 +11,27 @@
     <select class="form-control" id="survey">
         @foreach (var item in Model)
         {
-            <option>@item.Title</option>
+            <option id="@item.Id">@item.Title</option>
         }
     </select>
+
+    <br />
+    <a href="" onclick="GetSurvey()" type="button" class="btn btn-info">Search</a>
 </div>
-<br />
-<button style="margin-left:40px"type="button" class="btn btn-success">Search</button>
+
+ 
+<script>
+    function GetSurvey() {
+        debugger;
+        surveyId = $("#survey option:selected").attr("id");
+        $.ajax({
+            url: "Statistics/ShowResults",
+            type: "GET",
+            data: {
+                surveyId: surveyId
+            },
+            'success': function (data) {}
+        })
+    }
+   
+</script>

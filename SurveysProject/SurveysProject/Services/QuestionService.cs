@@ -51,5 +51,13 @@ namespace SurveysProject.Services
             QuestionOption questionOption = context.QuestionOptions.Where(x => x.QuestionOptionId == selectedOptionId).Include(x => x.Question).FirstOrDefault();
             return questionOption;
         }
+
+
+        public string GetQuestionTextById(int questionId)
+        {
+            Question question = context.Questions.Where(x => x.QuestionId == questionId).Include(x => x.Text).FirstOrDefault();
+            return question.Text;
+        }
+
     }
 }

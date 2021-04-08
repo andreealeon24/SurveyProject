@@ -1,4 +1,5 @@
-﻿using SurveysProject.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SurveysProject.Models;
 using SurveysProject.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,8 +31,14 @@ namespace SurveysProject.Services
 
         public Survey GetSurvey(int surveyId)
         {
-            Survey survey = context.Surveys.Where(x=>x.Id==surveyId).FirstOrDefault();
+            Survey survey = context.Surveys.Where(x=>x.Id==surveyId).SingleOrDefault();
             return survey;
+        }
+
+        public string GetSurveyTitleById(int surveyId)
+        {
+            Survey survey = context.Surveys.Where(x => x.Id == surveyId).SingleOrDefault();
+            return survey.Title;
         }
 
     }

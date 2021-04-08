@@ -1,4 +1,4 @@
-﻿@model SurveysProject.Models.Data.DataModel
+﻿@model SurveysProject.Models.ViewModels.DataModel
 
 
 <head>
@@ -10,56 +10,15 @@
     <form asp-controller="Question" asp-action="AddQuestion" asp-route-id="Id">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Survey.Id" id="survey" />
+        <label asp-for="Survey.Title" class="control-label"></label>
+        <input asp-for="Survey.Title" class="form-control" value="@Model.Survey.Title" id="survey" disabled/>
         <div class="form-group">
             <label asp-for="Question.Text" class="control-label"></label>
             <input asp-for="Question.Text" class="form-control" placeholder="Enter question" id="question1" />
             <span asp-validation-for="Question.Text" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
-            <label asp-for="QuestionOption1.QuestionOptionText" class="control-label"></label>
-            <div class=" input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text" style="color: green">1</div>
-                </div>
-                <input asp-for="QuestionOption1.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption1" />
-            </div>
-            <span asp-validation-for="QuestionOption1.QuestionOptionText" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="QuestionOption2.QuestionOptionText" class="control-label"></label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text" style="color:green">2</div>
-                </div>
-                <input asp-for="QuestionOption2.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption2" />
-            </div>
-            <span asp-validation-for="QuestionOption2.QuestionOptionText" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="QuestionOption3.QuestionOptionText" class="control-label"></label>
-            <div class=" input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text" style="color:green">3</div>
-                </div>
-                <input asp-for="QuestionOption3.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption3" />
-            </div>
-            <span asp-validation-for="QuestionOption3.QuestionOptionText" class="text-danger"></span>
-        </div>
-
-        <input type="submit" class="btn btn-success" value="Insert Question" />
-        <a href="@Url.Action("CreatedSuccessfully", "CreateSurvey")" type="button" class="btn btn-outline-success">Finish Survey</a>
+        <input type="submit" class="btn btn-info" value="Next to Question Options" />
+        <a href="@Url.Action("CreatedSuccessfully", "CreateSurvey")" type="button" class="btn btn-outline-info">Finish Survey</a>
     </form>
-</div>
-
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-body">
-        You
-        <div class="mt-2 pt-2 border-top">
-            <button type="button" class="btn btn-primary btn-sm">Take action</button>
-            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
-        </div>
-    </div>
 </div>
