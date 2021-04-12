@@ -31,14 +31,7 @@ namespace SurveysProject.Services
 
         public Survey GetSurvey(int surveyId)
         {
-            Survey survey = context.Surveys.Where(x=>x.Id==surveyId).SingleOrDefault();
-            return survey;
-        }
-
-        public string GetSurveyTitleById(int surveyId)
-        {
-            Survey survey = context.Surveys.Where(x => x.Id == surveyId).SingleOrDefault();
-            return survey.Title;
+            return context.Surveys.Find(surveyId);
         }
 
     }

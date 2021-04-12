@@ -11,6 +11,5 @@ namespace SurveysProject.Services.Interfaces
         int AddSurvey(Survey survey);
         List<Survey> GetSurveys();
         Survey GetSurvey(int surveyId);
-        string GetSurveyTitleById(int surveyId);
     }
 }

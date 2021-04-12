@@ -45,7 +45,7 @@ namespace SurveysProject.Controllers
                 question.Options = questionService.GetOptionsForQuestion(question.QuestionId);
             }
             //numar de raspunsuri ptr fiecare optiune
-            return View("Results.cshtml", model);
+            return View("Views/Statistics/Results.cshtml", model);
         }
 
     }

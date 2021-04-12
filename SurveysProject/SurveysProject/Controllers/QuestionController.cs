@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SurveysProject.Models;
 using SurveysProject.Models.Data;
 using SurveysProject.Models.ViewModels;
 using SurveysProject.Services.Interfaces;
@@ -29,41 +30,35 @@ namespace SurveysProject.Controllers
         [HttpPost]
         public ActionResult AddQuestion(DataModel data)
         {
+            data.Survey = surveyService.GetSurvey(data.Survey.Id);
+
             Question question = new Question();
             question.Survey = data.Survey;
             question.Text = data.Question.Text;
             questionService.AddQuestion(question);
-
-            data.Survey.Title = surveyService.GetSurveyTitleById(data.Survey.Id);
-
+            
             DataModel model = new DataModel();
-            model.Survey = data.Survey;
             model.Question = question;
+            model.Survey = data.Survey;
 
             return View("Views/Question/QuestionOption.cshtml", model);
         }
 
         public ActionResult AddQuestionOption(DataModel data)
         {
-          
+            data.Survey = surveyService.GetSurvey(data.Survey.Id);
+            data.Question = questionService.GetQuestionById(data.Question.QuestionId);
+
             QuestionOption questionOption = new QuestionOption();
             questionOption.Question = data.Question;
             questionOption.QuestionOptionText = data.QuestionOption.QuestionOptionText;
             questionService.AddQuestionOption(questionOption);
-
-
-            string title= surveyService.GetSurveyTitleById(data.Survey.Id);
-            data.Survey.Title = title;
-
-            string text= questionService.GetQuestionTextById(data.Question.QuestionId);
-            data.Question.Text = text;
 
             DataModel model = new DataModel();
             model.Survey= data.Survey;
             model.Question = data.Question;
 
             ModelState.Clear();
-
 
             return View("Views/Question/QuestionOption.cshtml", model);
         }
