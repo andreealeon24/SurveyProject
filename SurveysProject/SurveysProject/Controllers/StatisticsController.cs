@@ -33,18 +33,48 @@ namespace SurveysProject.Controllers
         }
 
 
-        public ActionResult ShowResults(int surveyId)
+        public IActionResult ViewSurvey(int surveyId)
+        {
+            StatisticsModel model = new StatisticsModel();
+            model.Survey = surveyService.GetSurvey(surveyId);
+            model.Questions = questionService.GetQuestionsForSurvey(surveyId);
+            foreach(var question in model.Questions)
+            {
+                question.Options = questionService.GetOptionsForQuestion(question.QuestionId);
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult ShowResults(int surveyId)
         {
             StatisticsModel model = new StatisticsModel();
             model.Survey = surveyService.GetSurvey(surveyId);
             model.NumberOfResponses = statisticsService.GetNumerOfResponsesBySurvey(surveyId);
 
             model.Questions = questionService.GetQuestionsForSurvey(surveyId);
-            foreach(var question in model.Questions)
+
+            model.QuestionStatistics = new List<QuestionStatistics>();
+            foreach (var question in model.Questions)
             {
+                QuestionStatistics questionStatistics = new QuestionStatistics();
+                questionStatistics.Question = question;
+                questionStatistics.QuestionOptionModels = new List<QuestionOptionModel>();
+
                 question.Options = questionService.GetOptionsForQuestion(question.QuestionId);
+
+                foreach(var option in question.Options)
+                {
+                    QuestionOptionModel questionOptionModel = new QuestionOptionModel();
+                    questionOptionModel.QuestionOption = option;
+                    questionOptionModel.countQuestionOptionSelected = questionService.GetCountQuestionOptionSelectById(option.QuestionOptionId);
+                    questionStatistics.QuestionOptionModels.Add(questionOptionModel);
+
+                }
+
+                model.QuestionStatistics.Add(questionStatistics);
             }
-            //numar de raspunsuri ptr fiecare optiune
+
             return View("Views/Statistics/Results.cshtml", model);
         }
 

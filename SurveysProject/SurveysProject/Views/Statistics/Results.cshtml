@@ -6,10 +6,10 @@
 
 <body>
 
-    <h2 id="survey">@Model.Survey.Title : @Model.NumberOfResponses</h2>
+    <h2 id="survey">@Model.Survey.Title : @Model.NumberOfResponses responses</h2>
 
-    @foreach (var question in Model.Questions)
-    { <h2 id="question">@question.Text</h2>
+    @foreach (var question in Model.QuestionStatistics)
+    { <h3 id="question">@question.Question.Text</h3>
 
     <table class="table">
         <thead>
@@ -24,16 +24,16 @@
             </tr>
         </thead>
 
-        @foreach (var option in question.Options)
+        @foreach (var option in question.QuestionOptionModels)
         {
         <tbody>
             <tr>
                 <td>
-                    @option.QuestionOptionText
+                    @option.QuestionOption.QuestionOptionText
                 </td>
 
                 <td>
-                    10
+                    @option.countQuestionOptionSelected
                 </td>
             </tr>
         </tbody>

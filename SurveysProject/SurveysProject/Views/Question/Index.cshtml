@@ -18,8 +18,13 @@
 
         <div class="form-group">
             <label asp-for="Question.Text" class="control-label"></label>
-            <input asp-for="Question.Text" class="form-control" placeholder="Enter question" id="Question.Text" />
-            <span asp-validation-for="Question.Text" class="text-danger"></span>
+            <div class=" input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">@ViewBag.question</div>
+                </div>
+                <input asp-for="Question.Text" class="form-control" placeholder="Enter question" id="Question.Text" />
+                <span asp-validation-for="Question.Text" class="text-danger"></span>
+            </div>
         </div>
 
         <input type="submit" class="btn btn-info" value="Next to Question Options" />

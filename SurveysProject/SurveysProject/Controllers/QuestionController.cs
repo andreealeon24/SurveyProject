@@ -3,7 +3,7 @@ using SurveysProject.Models;
 using SurveysProject.Models.Data;
 using SurveysProject.Models.ViewModels;
 using SurveysProject.Services.Interfaces;
-
+using System;
 
 namespace SurveysProject.Controllers
 {
@@ -27,6 +27,14 @@ namespace SurveysProject.Controllers
             return View();
         }
 
+        public IActionResult GetQuestionPage( int id)
+        {
+            DataModel data = new DataModel();
+            data.Survey = surveyService.GetSurvey(id);
+            ViewBag.question = questionService.GetCountQuestion(id) + 1;
+            return View("Views/Question/Index.cshtml", data);
+        }
+
         [HttpPost]
         public ActionResult AddQuestion(DataModel data)
         {
@@ -40,7 +48,8 @@ namespace SurveysProject.Controllers
             DataModel model = new DataModel();
             model.Question = question;
             model.Survey = data.Survey;
-
+            ViewBag.option = 1;
+            ViewBag.question = questionService.GetCountQuestion(model.Survey.Id);
             return View("Views/Question/QuestionOption.cshtml", model);
         }
 
@@ -59,6 +68,9 @@ namespace SurveysProject.Controllers
             model.Question = data.Question;
 
             ModelState.Clear();
+
+            ViewBag.option = questionService.GetCountQuestionOptionByQuestionId(model.Question.QuestionId) + 1;
+            ViewBag.question = questionService.GetCountQuestion(model.Survey.Id);
 
             return View("Views/Question/QuestionOption.cshtml", model);
         }

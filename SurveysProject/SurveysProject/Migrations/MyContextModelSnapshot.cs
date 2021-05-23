@@ -88,6 +88,30 @@ namespace SurveysProject.Migrations
                     b.ToTable("Responses");
                 });
 
+            modelBuilder.Entity("SurveysProject.Models.Data.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("SurveysProject.Models.Survey", b =>
                 {
                     b.Property<int>("Id")
@@ -95,11 +119,19 @@ namespace SurveysProject.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("CreateFor")
+                        .HasColumnType("nvarchar(30)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Surveys");
                 });
@@ -141,6 +173,15 @@ namespace SurveysProject.Migrations
                     b.Navigation("QuestionOption");
 
                     b.Navigation("Survey");
+                });
+
+            modelBuilder.Entity("SurveysProject.Models.Survey", b =>
+                {
+                    b.HasOne("SurveysProject.Models.Data.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SurveysProject.Models.Data.Question", b =>

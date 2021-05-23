@@ -18,9 +18,13 @@ namespace SurveysProject.Controllers
     public class CreateSurveyController : Controller
     {
         private ISurveyService surveyService;
-        public CreateSurveyController(ISurveyService surveyService)
+        private IQuestionService questionService;
+        private IResponseService responseService;
+        public CreateSurveyController(ISurveyService surveyService, IQuestionService questionService, IResponseService responseService)
         {
             this.surveyService = surveyService;
+            this.questionService = questionService;
+            this.responseService = responseService;
         }
 
         public IActionResult Index()
@@ -33,20 +37,35 @@ namespace SurveysProject.Controllers
             return View();
         }
 
+        public IActionResult DeletedSuccessfully()
+        {
+            return View();
+        }
+
 
         [HttpPost]
-        public ActionResult AddSurvey(string title)
+        public ActionResult AddSurvey(Survey survey)
         {
             Survey survey2 = new Survey();
-            survey2.Title = title;
+            survey2.Title = survey.Title;
+            survey2.CreateFor = survey.CreateFor;
             int surveyid = surveyService.AddSurvey(survey2);
-            Survey survey = surveyService.GetSurvey(surveyid);
+            Survey survey3 = surveyService.GetSurvey(surveyid);
 
             DataModel model = new DataModel();
-            model.Survey = survey;
+            model.Survey = survey3;
+            ViewBag.question = 1;
             return View("Views/Question/Index.cshtml", model);
         }
 
-    
+        public IActionResult DeleteSurvey(int surveyId)
+        {
+            Survey survey = surveyService.GetSurvey(surveyId);
+            surveyService.DeleteSurvey(survey);
+
+            return View("Views/CreateSurvey/DeletedSuccessfully.cshtml");
+        }
+
+
     }
 }

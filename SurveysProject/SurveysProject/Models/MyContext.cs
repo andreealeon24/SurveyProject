@@ -10,6 +10,7 @@ namespace SurveysProject.Models
         public DbSet<Question> Questions { get; set; }
         public DbSet<Response> Responses { get; set; }
         public DbSet<QuestionOption> QuestionOptions { get; set; }
+        public DbSet<User> User { get; set; }
 
     }
 }

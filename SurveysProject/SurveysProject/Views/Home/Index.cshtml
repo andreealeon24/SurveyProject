@@ -6,31 +6,36 @@
 }
 
 <body>
+    <h4>Hello, @ViewBag.userName!</h4>
 
     <table class="table">
         <thead>
             <tr class="text-white" style="background-color: #4d90ba ">
-                
+
                 <th>
                     @Html.DisplayNameFor(model => model.Title)
                 </th>
+
                 <th>
 
                 </th>
+
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @item.Title
-                    </td>
+            <tr>
+                <td>
+                    @item.Title
+                </td>
 
-                    <td>
-                        <a href="@Url.Action("Index", "CompleteSurvey", new {surveyId= item.Id})" class="btn btn-outline-info">Complete</a>
-                    </td>
-                </tr>
+                <td>
+                    <a href="@Url.Action("Index", "CompleteSurvey", new {surveyId= item.Id})" class="btn btn-outline-info" style="margin-left:50%" id="complete">Complete</a>
+                    <a href="@Url.Action("ViewSurvey", "Statistics", new {surveyId= item.Id})" class="btn btn-outline-info"style="margin-left:2%" id="view">View</a>
+                    <a href="@Url.Action("DeleteSurvey", "CreateSurvey", new {surveyId= item.Id})" class="btn btn-outline-info" style="margin-left:2%" id="delete">Delete</a>
+                </td>
+            </tr>
             }
         </tbody>
 

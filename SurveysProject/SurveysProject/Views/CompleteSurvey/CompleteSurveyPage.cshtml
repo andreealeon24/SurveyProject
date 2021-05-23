@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SurveysProject.Models.Survey>
+
+
+@{
+    ViewData["Title"] = "Complete Survey Page";
+}
+
+<body>
+    <h3 style="margin-bottom:5%">Your surveys to complete</h3>
+    <table class="table">
+        <thead>
+            <tr class="text-white" style="background-color: #4d90ba ">
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+
+                <th>
+
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Title
+                    </td>
+
+                    <td>
+                        <a href="@Url.Action("Index", "CompleteSurvey", new {surveyId= item.Id})" class="btn btn-outline-info" style="margin-left:50%">Complete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</body>
+

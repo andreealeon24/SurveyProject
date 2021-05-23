@@ -9,8 +9,8 @@
     <script src="https://kit.fontawesome.com/42daf7d6ae.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#4d90ba ">
+    <header >
+        <nav id="header" class="navbar navbar-expand-lg navbar-light" style="background-color:#4d90ba ">
             
             <div class="container">
                 <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index"> <icon class="fa fa-list-alt" aria-hidden="true"></icon> Surveys Project</a>
@@ -31,6 +31,17 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy"><icon class="fa fa-get-pocket" aria-hidden="true"></icon> Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="CompleteSurvey" asp-action="CompleteSurveyPage"><icon class="fa fa-get-pocket" aria-hidden="true"></icon> Complete Surveys</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav flex-grow-1" style="align-content:end">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Login" asp-action="Index" aria-hidden="true"> Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Register" asp-action="Index" aria-hidden="true">Create account</a>
                         </li>
                     </ul>
                 </div>

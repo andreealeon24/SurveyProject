@@ -10,7 +10,11 @@ namespace SurveysProject.Services.Interfaces
     {
         int AddQuestion(Question question);
 
+        int DeleteQuestion(Question question);
+
         int AddQuestionOption(QuestionOption questionOption);
+
+        int DeleteQuestionOption(QuestionOption questionoption);
 
         List<Question> GetQuestionsForSurvey(int surveyId);
 
@@ -20,5 +24,10 @@ namespace SurveysProject.Services.Interfaces
 
         QuestionOption GetOptionById(int selectedOptionId);
         Question GetQuestionById(int questionId);
+
+        int GetCountQuestionOptionSelectById(int questionOptionId);
+
+        int GetCountQuestionOptionByQuestionId(int questionId);
+
     }
 }

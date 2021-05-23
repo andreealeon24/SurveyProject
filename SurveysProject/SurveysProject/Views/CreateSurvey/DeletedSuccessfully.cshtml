@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"] Delete Successfuly</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/42daf7d6ae.js" crossorigin="anonymous"></script>
+</head>
+
+
+<body>
+    <div style="text-align: center;">
+        <icon class="fa fa-check-circle-o fa-10x" style="margin-top: 60px; color: chartreuse"></icon>
+        <h1 style="color: chartreuse">Thank you!</h1>
+        <h2>The survey was successfully deleted!</h2>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="@Url.Action("Index", "Home")" type="button" class="btn btn-info" style="margin-top:70px;">Back to survey list</a>
+    </div>
+</body>
+</html>

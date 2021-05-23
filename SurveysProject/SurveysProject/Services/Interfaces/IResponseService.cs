@@ -11,6 +11,10 @@ namespace SurveysProject.Services.Interfaces
 
         int AddResponse(Response response);
 
+        int DeleteResponse(Response response);
+
+        List<Response> GetResponsesByOptionId(int optionId);
+
 
     }
 }

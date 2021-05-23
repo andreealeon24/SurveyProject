@@ -2,6 +2,7 @@
 using SurveysProject.Models;
 using SurveysProject.Models.Data;
 using SurveysProject.Services.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SurveysProject.Services
@@ -23,6 +24,18 @@ namespace SurveysProject.Services
             context.Entry(response.QuestionOption).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
             context.SaveChanges();
             return response.ResponseId;
+        }
+
+        public int DeleteResponse(Response response)
+        {
+            context.Responses.Remove(response);
+            context.SaveChanges();
+            return 0;
+        }
+
+        public List<Response> GetResponsesByOptionId(int optionId)
+        {
+            return context.Responses.Where(x => x.QuestionOption.QuestionOptionId == optionId).ToList();
         }
 
     }

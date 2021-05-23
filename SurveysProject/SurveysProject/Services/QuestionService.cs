@@ -10,8 +10,15 @@ namespace SurveysProject.Services
     public class QuestionService:IQuestionService
     {
         private MyContext context;
+        private IResponseService responseService;
 
-        public QuestionService(MyContext context) => this.context = context;
+
+        public QuestionService(MyContext context, IResponseService responseService)
+        {
+            this.context = context;
+            this.responseService = responseService;
+
+        }
 
         public int AddQuestion(Question question)
         {
@@ -27,6 +34,32 @@ namespace SurveysProject.Services
             context.Entry(questionOption.Question).State = Microsoft.EntityFrameworkCore.EntityState.Unchanged;
             context.SaveChanges();
             return questionOption.QuestionOptionId;
+        }
+
+        public int DeleteQuestion(Question question)
+        {
+            List<QuestionOption> questionOptions = new List<QuestionOption>();
+            questionOptions = GetOptionsForQuestion(question.QuestionId);
+            foreach (var option in questionOptions)
+            {
+                DeleteQuestionOption(option);
+            }
+            context.Questions.Remove(question);
+            context.SaveChanges();
+            return 0;
+        }
+
+        public int DeleteQuestionOption(QuestionOption questionOption)
+        {
+            List<Response> responses = new List<Response>();
+            responses = responseService.GetResponsesByOptionId(questionOption.QuestionOptionId);
+            foreach (var response in responses)
+            {
+                responseService.DeleteResponse(response);
+            }
+            context.QuestionOptions.Remove(questionOption);
+            context.SaveChanges();
+            return 0;
         }
 
         public List<Question> GetQuestionsForSurvey(int surveyId) 
@@ -57,6 +90,16 @@ namespace SurveysProject.Services
         {
 
             return context.Questions.Find(questionId);
+        }
+
+        public int GetCountQuestionOptionSelectById(int questionOptionId)
+        {
+            return context.Responses.Where(x => x.QuestionOption.QuestionOptionId == questionOptionId).Count();
+        }
+
+        public int GetCountQuestionOptionByQuestionId(int questionId)
+        {
+            return context.QuestionOptions.Where(x => x.Question.QuestionId == questionId).Count();
         }
 
 

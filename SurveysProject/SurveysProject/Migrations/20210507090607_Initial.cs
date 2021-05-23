@@ -2,21 +2,45 @@
 
 namespace SurveysProject.Migrations
 {
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Role = table.Column<string>(type: "nvarchar(30)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(30)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(30)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(30)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Surveys",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(30)", nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(30)", nullable: false),
+                    CreateFor = table.Column<string>(type: "nvarchar(30)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Surveys", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Surveys_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -116,6 +140,11 @@ namespace SurveysProject.Migrations
                 name: "IX_Responses_SurveyId",
                 table: "Responses",
                 column: "SurveyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Surveys_UserId",
+                table: "Surveys",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -131,6 +160,9 @@ namespace SurveysProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "Surveys");
+
+            migrationBuilder.DropTable(
+                name: "User");
         }
     }
 }

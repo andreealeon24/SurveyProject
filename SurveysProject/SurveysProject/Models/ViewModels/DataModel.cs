@@ -14,6 +14,7 @@ namespace SurveysProject.Models.ViewModels
 
         public Survey Survey { get; set; }
 
+        public User User { get; set; }
 
     }
 }

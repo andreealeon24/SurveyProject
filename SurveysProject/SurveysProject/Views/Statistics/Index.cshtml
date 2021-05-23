@@ -6,32 +6,35 @@
 
 <h1> Statistics</h1>
 
-<div class="col-md-8">
-    <label for="survey">Survey:</label>
-    <select class="form-control" id="survey">
-        @foreach (var item in Model)
-        {
-            <option id="@item.Id">@item.Title</option>
-        }
-    </select>
+<body>
 
-    <br />
-    <a href="" onclick="GetSurvey()" type="button" class="btn btn-info">Search</a>
-</div>
+    <table class="table">
+        <thead>
+            <tr class="text-white" style="background-color: #4d90ba ">
 
- 
-<script>
-    function GetSurvey() {
-        debugger;
-        surveyId = $("#survey option:selected").attr("id");
-        $.ajax({
-            url: "Statistics/ShowResults",
-            type: "GET",
-            data: {
-                surveyId: surveyId
-            },
-            'success': function (data) {}
-        })
-    }
-   
-</script>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Title
+                    </td>
+
+                    <td>
+                        <a href="@Url.Action("ShowResults", "Statistics", new {surveyId= item.Id})" class="btn btn-outline-info">View Statistics</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</body>

@@ -14,6 +14,10 @@ namespace SurveysProject.Models
         [Column(TypeName ="nvarchar(30)")]
         public string Title { get; set; }
 
+        [Column(TypeName = "nvarchar(30)")]
+        public string CreateFor { get; set; }
         public List<Question> Questions { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

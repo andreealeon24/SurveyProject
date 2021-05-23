@@ -25,6 +25,12 @@ namespace SurveysProject.Controllers
             this.responseService = responseService;
         }
 
+        public IActionResult CompleteSurveyPage()
+        {
+            List<Survey> surveys = surveyService.GetSurveysByCreateFor("Teacher");
+            return View(surveys);
+        }
+
         public IActionResult CompletedSuccessfully()
         {
             return View();
@@ -35,8 +41,6 @@ namespace SurveysProject.Controllers
             Survey survey = surveyService.GetSurvey(surveyId);
             if (questionService.GetCountQuestion(surveyId) > 0)
             {
-                // verifica daca survey-ul are intrebari (si optiuni), daca nu, vei avea eroare
-
 
                 List<Question> questions = questionService.GetQuestionsForSurvey(surveyId).Take(1).ToList();
                 survey.Questions = new List<Question>();
@@ -76,13 +80,11 @@ namespace SurveysProject.Controllers
             ViewBag.page = page;
 
             List<Question> questions = questionService.GetQuestionsForSurvey(surveyId).Skip(page).Take(1).ToList();
-
-            // daca nu mai sunt alte intrebari
+            
             if (questions.Count <= 0)
             {
                 List<Survey> surveys = surveyService.GetSurveys();
                 return View("Views/CompleteSurvey/CompletedSuccessfully.cshtml", surveys);
-                // sau poti crea o pagina cu o imagine cu bifa si un mesaj cu The survey was successfully completed!
             }
 
             survey.Questions = new List<Question>();

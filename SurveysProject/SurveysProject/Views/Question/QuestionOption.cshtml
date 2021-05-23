@@ -12,26 +12,31 @@
         <div class="form-group">
             <input type="hidden" asp-for="Survey.Id" id="survey" />
             <label asp-for="Survey.Title" class="control-label"></label>
-            <input asp-for="Survey.Title" class="form-control" value="@Model.Survey.Title" id="surveyTitle" disabled/>
+            <input asp-for="Survey.Title" class="form-control" value="@Model.Survey.Title" id="surveyTitle" disabled />
 
             <input type="hidden" asp-for="Question.QuestionId" />
             <label asp-for="Question.Text" class="control-label"></label>
-            <input asp-for="Question.Text" class="form-control" value="@Model.Question.Text" id="question" disabled />
+            <div class=" input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">@ViewBag.question</div>
+                </div>
+                <input asp-for="Question.Text" class="form-control" value="@Model.Question.Text" id="question" disabled />
+            </div>
+            
         </div>
 
         <div class="form-group">
             <label asp-for="QuestionOption.QuestionOptionText" class="control-label"></label>
             <div class=" input-group">
                 <div class="input-group-prepend">
-                    <div class="input-group-text">1</div>
+                    <div class="input-group-text">@ViewBag.option</div>
                 </div>
                 <input asp-for="QuestionOption.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption" />
             </div>
             <span asp-validation-for="QuestionOption.QuestionOptionText" class="text-danger"></span>
         </div>
-
-        <input type="submit" class="btn btn-info" value="Insert Question Option" />
-        <a href="@Url.Action("Index", "Question")" type="button" class="btn btn-info">Add New Question</a>
+            <input type="submit" class="btn btn-info" value="Insert Question Option" />
+        <a href="@Url.Action("GetQuestionPage", "Question", new { id = Model.Survey.Id })" type="button" class="btn btn-info">Add New Question</a>
         <a href="@Url.Action("CreatedSuccessfully", "CreateSurvey")" type="button" class="btn btn-outline-info">Finish Survey</a>
     </form>
 </div>

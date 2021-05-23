@@ -1,0 +1,26 @@
+﻿@model SurveysProject.Models.ViewModels.StatisticsModel
+
+
+@{
+    ViewData["Title"] = "View Survey";
+}
+
+<body>
+
+    <h2 id="survey">@Model.Survey.Title</h2>
+
+    @foreach (var question in Model.Questions)
+    {
+        <h3 id="question">@question.Text</h3>
+
+
+        @foreach (var option in question.Options)
+        {
+            <input type="radio" class="form-check-input" name="optradio" disabled>@option.QuestionOptionText
+            <br />
+        }
+
+        <br /><br />
+    }
+
+</body>

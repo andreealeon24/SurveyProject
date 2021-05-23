@@ -9,7 +9,10 @@ namespace SurveysProject.Services.Interfaces
     public interface ISurveyService
     {
         int AddSurvey(Survey survey);
+        int DeleteSurvey(Survey survey);
         List<Survey> GetSurveys();
         Survey GetSurvey(int surveyId);
+        List<Survey> GetSurveysByUserId(int userId);
+        List<Survey> GetSurveysByCreateFor(string createFor);
     }
 }

@@ -29,13 +29,16 @@ namespace SurveysProject
         {
             services.AddControllersWithViews();
             services.AddDbContext<MyContext>(options=>options.UseSqlServer("Data Source = (LocalDB)\\LocalDB; Initial Catalog = Surveys; Integrated Security = True"));
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => { options.IdleTimeout = TimeSpan.FromMinutes(60); });
 
-           // services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            // services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddScoped<ISurveyService, SurveyService>();
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IResponseService, ResponseService>();
             services.AddScoped<IStatisticsService, StatisticsService>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +58,7 @@ namespace SurveysProject
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 
@@ -62,7 +66,7 @@ namespace SurveysProject
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
