@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SurveysProject.Services.Interfaces;
 using SurveysProject.Models;
 using SurveysProject.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace SurveysProject.Controllers
 {
@@ -23,8 +24,24 @@ namespace SurveysProject.Controllers
         }
         public IActionResult Index()
         {
-            List<Survey> surveys = surveyService.GetSurveys();
-            return View(surveys);
+            if (HttpContext.Session.GetString("Role") == "Admin")
+            {
+                List<Survey> surveys = new List<Survey>();
+                surveys = surveyService.GetSurveys();
+                return View("Views/Statistics/Index.cshtml", surveys);
+            }
+            else if (HttpContext.Session.GetString("Role") == "Teacher")
+            {
+                List<Survey> surveys = new List<Survey>();
+                surveys = surveyService.GetSurveysByUserId((int)HttpContext.Session.GetInt32("Id"));
+                return View("Views/Statistics/Index.cshtml", surveys);
+            }
+            else
+            {
+                List<Survey> surveys = new List<Survey>();
+                surveys = surveyService.GetSurveysByCreateFor(HttpContext.Session.GetString("Role"));
+                return View("Views/Statistics/Index.cshtml", surveys);
+            }
         }
 
         public IActionResult Results()

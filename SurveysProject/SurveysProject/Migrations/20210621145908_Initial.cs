@@ -13,7 +13,7 @@ namespace SurveysProject.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Role = table.Column<string>(type: "nvarchar(30)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(30)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(30)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(30)", nullable: true)
                 },
@@ -28,7 +28,7 @@ namespace SurveysProject.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(30)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     CreateFor = table.Column<string>(type: "nvarchar(30)", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -49,7 +49,7 @@ namespace SurveysProject.Migrations
                 {
                     QuestionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(type: "nvarchar(30)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     SurveyId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -69,7 +69,7 @@ namespace SurveysProject.Migrations
                 {
                     QuestionOptionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    QuestionOptionText = table.Column<string>(type: "nvarchar(30)", nullable: false),
+                    QuestionOptionText = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     QuestionId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

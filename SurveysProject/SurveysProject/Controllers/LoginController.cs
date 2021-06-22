@@ -21,8 +21,6 @@ namespace SurveysProject.Controllers
             this.surveyService = surveyService;
         }
 
-        const string SessionId = "_Id";
-        const string SessionName = "_Name";
         public IActionResult Index()
         {
             return View();
@@ -38,10 +36,9 @@ namespace SurveysProject.Controllers
             
             if (user2 != null)
             {
-                HttpContext.Session.SetString( SessionId, user2.Id.ToString());
-                HttpContext.Session.SetString(SessionName, user2.Name);
-
-                ViewBag.userName = HttpContext.Session.GetString(SessionName);
+                HttpContext.Session.SetInt32( "Id", user2.Id);
+                HttpContext.Session.SetString("Name", user2.Name);
+                HttpContext.Session.SetString("Role", user2.Role);
 
                 if (user2.Role == "Admin")
                 {
@@ -71,6 +68,14 @@ namespace SurveysProject.Controllers
                 return View("Views/Login/Index.cshtml");
             }
                  
+        }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.SetString("Name", "");
+            HttpContext.Session.SetString("Role", "");
+            HttpContext.Session.SetInt32("Id", 0);
+
+            return View("Views/Login/Index.cshtml");
         }
     }
 }

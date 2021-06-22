@@ -11,7 +11,7 @@ namespace SurveysProject.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "This field is required.")]
-        [Column(TypeName ="nvarchar(30)")]
+        [Column(TypeName ="nvarchar(100)")]
         public string Title { get; set; }
 
         [Column(TypeName = "nvarchar(30)")]

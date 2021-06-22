@@ -50,6 +50,11 @@ namespace SurveysProject.Services
             return context.Surveys.Find(surveyId);
         }
 
+        public int GetCountSurveysByUserId(int userId)
+        {
+            return context.Surveys.Where(x => x.User.Id == userId).Count();
+        }
+
         public List<Survey> GetSurveysByUserId(int userId)
         {
             List<Survey> surveys = context.Surveys.Where(x => x.User.Id == userId).ToList();

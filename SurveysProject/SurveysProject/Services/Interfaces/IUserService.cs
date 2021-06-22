@@ -9,6 +9,9 @@ namespace SurveysProject.Services.Interfaces
     public interface IUserService
     {
         int AddUser(User user);
+        int DeleteUser(User user);
         User GetUser(string email, string password);
+        List<User> GetUsers();
+        User GetUserById(int id);
     }
 }

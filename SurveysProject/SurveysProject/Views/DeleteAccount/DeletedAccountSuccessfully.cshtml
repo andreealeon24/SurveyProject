@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewData["Title"] Created Successfully</title>
+    <title>@ViewData["Title"] Delete Successfully</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <script src="https://kit.fontawesome.com/42daf7d6ae.js" crossorigin="anonymous"></script>
 </head>
@@ -11,11 +11,11 @@
     <div style="text-align: center;">
         <icon class="fa fa-check-circle-o fa-10x" style="margin-top: 60px; color: chartreuse"></icon>
         <h1 style="color: chartreuse">Thank you!</h1>
-        <h2>The survey was successfully created!</h2>
+        <h2>The account was successfully deleted!</h2>
     </div>
 
     <div style="text-align: center;">
-        <a href="@Url.Action("Index", "Home")" type="button" class="btn btn-info" style="margin-top:70px;">Back to survey list</a>
+        <a href="@Url.Action("Index", "DeleteAccount")" type="button" class="btn btn-info" style="margin-top:70px;">Back to users list</a>
     </div>
 </body>
 </html>

@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@model IEnumerable<SurveysProject.Models.Data.User>
+
+
+
+@{
+    ViewData["Title"] = "Detele Account Page";
+}
+
+<body>
+
+    <table class="table">
+        <thead>
+            <tr class="text-white" style="background-color: #4d90ba ">
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Role)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+
+                <td>
+                    @item.Role
+                </td>
+
+                <td>
+                    @item.Email
+                </td>
+
+                <td>
+                    <a href="@Url.Action("DeleteAccount", "DeleteAccount", new {userId= item.Id})" class="btn btn-outline-info" style="margin-left:10%" id="delete">Delete</a>
+
+                </td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
+
+</body>
+

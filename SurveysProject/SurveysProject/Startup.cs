@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SurveysProject.Services.Interfaces;
 using SurveysProject.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace SurveysProject
 {
@@ -39,6 +40,7 @@ namespace SurveysProject
             services.AddScoped<IResponseService, ResponseService>();
             services.AddScoped<IStatisticsService, StatisticsService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

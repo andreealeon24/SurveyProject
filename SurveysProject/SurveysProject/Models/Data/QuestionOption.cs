@@ -12,10 +12,9 @@ namespace SurveysProject.Models.Data
 
         [Required(ErrorMessage = "This field is required.")]
         [DisplayName("Question Option")]
-        [Column(TypeName = "nvarchar(30)")]
+        [Column(TypeName = "nvarchar(100)")]
         public string QuestionOptionText { get; set; }
         public virtual Question Question { get; set; }
 
-        //int NumberOfSelection {get; set;}
     }
 }

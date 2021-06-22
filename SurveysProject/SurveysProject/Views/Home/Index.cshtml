@@ -1,4 +1,7 @@
-﻿@model IEnumerable<SurveysProject.Models.Survey>
+﻿@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@model IEnumerable<SurveysProject.Models.Survey>
+
 
 
 @{
@@ -6,8 +9,6 @@
 }
 
 <body>
-    <h4>Hello, @ViewBag.userName!</h4>
-
     <table class="table">
         <thead>
             <tr class="text-white" style="background-color: #4d90ba ">
@@ -31,9 +32,15 @@
                 </td>
 
                 <td>
-                    <a href="@Url.Action("Index", "CompleteSurvey", new {surveyId= item.Id})" class="btn btn-outline-info" style="margin-left:50%" id="complete">Complete</a>
-                    <a href="@Url.Action("ViewSurvey", "Statistics", new {surveyId= item.Id})" class="btn btn-outline-info"style="margin-left:2%" id="view">View</a>
-                    <a href="@Url.Action("DeleteSurvey", "CreateSurvey", new {surveyId= item.Id})" class="btn btn-outline-info" style="margin-left:2%" id="delete">Delete</a>
+                    @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Admin" || @HttpContextAccessor.HttpContext.Session.GetString("Role") == "Teacher")
+                    {
+                        <a href="@Url.Action("ViewSurvey", "Statistics", new {surveyId= item.Id})" class="btn btn-outline-info" style="margin-left:2%" id="view">View</a>
+                        <a href="@Url.Action("DeleteSurvey", "CreateSurvey", new {surveyId= item.Id})" class="btn btn-outline-info" style="margin-left:2%" id="delete">Delete</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Index", "CompleteSurvey", new {surveyId= item.Id})" class="btn btn-outline-info" id="complete">Complete</a>
+                    }
                 </td>
             </tr>
             }

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,9 +12,9 @@
     <script src="https://kit.fontawesome.com/42daf7d6ae.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header >
+    <header>
         <nav id="header" class="navbar navbar-expand-lg navbar-light" style="background-color:#4d90ba ">
-            
+
             <div class="container">
                 <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index"> <icon class="fa fa-list-alt" aria-hidden="true"></icon> Surveys Project</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -19,6 +22,8 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Admin")
+                    {
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index"><icon class="fa fa-home" aria-hidden="true"></icon> Home</a>
@@ -30,20 +35,73 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Statistics" asp-action="Index"><icon class="fa fa-pie-chart" aria-hidden="true"></icon> Statistics</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Register" asp-action="Index"><icon class="fas fa-user-plus" aria-hidden="true"></icon>Create account</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="DeleteAccount" asp-action="Index"><icon class="fas fa-user-minus" aria-hidden="true"></icon>Delete account</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy"><icon class="fa fa-get-pocket" aria-hidden="true"></icon> Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="CompleteSurvey" asp-action="CompleteSurveyPage"><icon class="fa fa-get-pocket" aria-hidden="true"></icon> Complete Surveys</a>
-                        </li>
                     </ul>
-                    <ul class="navbar-nav flex-grow-1" style="align-content:end">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Login" asp-action="Index" aria-hidden="true"> Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Register" asp-action="Index" aria-hidden="true">Create account</a>
-                        </li>
-                    </ul>
+                        <ul class="navbar-nav flex-grow-1" style="margin-left:5%">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" >Hello, @HttpContextAccessor.HttpContext.Session.GetString("Name")!</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Login" asp-action="Logout" aria-hidden="true">Logout</a>
+                            </li>
+                        </ul>
+                    }
+                    else if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Teacher")
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index"><icon class="fa fa-home" aria-hidden="true"></icon> Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="CreateSurvey" asp-action="Index"><icon class="fa fa-plus" aria-hidden="true"></icon> Create Survey</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="CompleteSurvey" asp-action="CompleteSurveyPage"><icon class="fas fa-tasks" aria-hidden="true"></icon> Complete Surveys</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Statistics" asp-action="Index"><icon class="fa fa-pie-chart" aria-hidden="true"></icon> Statistics</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy"><icon class="fa fa-get-pocket" aria-hidden="true"></icon> Privacy</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-grow-1" style="margin-left: 20%">
+                            <li class="nav-item">
+                                <a class="nav-link text-white">Hello, @HttpContextAccessor.HttpContext.Session.GetString("Name")!</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Login" asp-action="Logout" aria-hidden="true">Logout</a>
+                            </li>
+                        </ul>
+
+                    }
+                    else if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Student")
+                    {
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index"><icon class="fa fa-home" aria-hidden="true"></icon> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Statistics" asp-action="Index"><icon class="fa fa-pie-chart" aria-hidden="true"></icon> Statistics</a>
+                    </li>
+                </ul>
+                        <ul class="navbar-nav flex-grow-1" style="margin-left: 55%">
+                            <li class="nav-item">
+                                <a class="nav-link text-white">Hello, @HttpContextAccessor.HttpContext.Session.GetString("Name")!</a>
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Login" asp-action="Logout" aria-hidden="true">Logout</a>
+                            </li>
+                        </ul>
+
+                    }
                 </div>
             </div>
         </nav>

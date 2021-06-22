@@ -482,3 +482,5 @@ C:\Users\Andreea\Desktop\Facultate\Anul III\Practica\SurveyProject\SurveysProjec
 C:\Users\Andreea\Desktop\Facultate\Anul III\Practica\SurveyProject\SurveysProject\SurveysProject\obj\Debug\net5.0\SurveysProject.pdb
 C:\Users\Andreea\Desktop\Facultate\Anul III\Practica\SurveyProject\SurveysProject\SurveysProject\obj\Debug\net5.0\SurveysProject.genruntimeconfig.cache
 C:\Users\Andreea\Desktop\Facultate\Anul III\Practica\SurveyProject\SurveysProject\SurveysProject\obj\Debug\net5.0\Razor\Views\CompleteSurvey\CompleteSurveyPage.cshtml.g.cs
+C:\Users\Andreea\Desktop\Facultate\Anul III\Practica\SurveyProject\SurveysProject\SurveysProject\obj\Debug\net5.0\Razor\Views\DeleteAccount\Index.cshtml.g.cs
+C:\Users\Andreea\Desktop\Facultate\Anul III\Practica\SurveyProject\SurveysProject\SurveysProject\obj\Debug\net5.0\Razor\Views\DeleteAccount\DeletedAccountSuccessfully.cshtml.g.cs

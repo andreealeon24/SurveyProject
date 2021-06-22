@@ -1,4 +1,6 @@
-﻿@model SurveysProject.Models.Survey
+﻿@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+@model SurveysProject.Models.Survey
 
 
 @{
@@ -15,12 +17,14 @@
             <input asp-for="Title" class="form-control" placeholder="Enter title" id="title" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
-
-        <div class="form-group">
-            <label asp-for="CreateFor" class="control-label"></label>
-            <input asp-for="CreateFor" class="form-control" placeholder="Enter enter for who you want to create. Student or Teacher?" id="createFor" />
-            <span asp-validation-for="CreateFor" class="text-danger"></span>
-        </div>
+        @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Admin")
+        {
+            <div class="form-group">
+                <label asp-for="CreateFor" class="control-label"></label>
+                <input asp-for="CreateFor" class="form-control" placeholder="Student or Teacher?" id="createFor" />
+                <span asp-validation-for="CreateFor" class="text-danger"></span>
+            </div>
+        }
 
         <input type="submit" class="btn btn-info" value="Next to Questions" />
     </form>

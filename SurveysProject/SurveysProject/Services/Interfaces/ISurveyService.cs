@@ -12,6 +12,7 @@ namespace SurveysProject.Services.Interfaces
         int DeleteSurvey(Survey survey);
         List<Survey> GetSurveys();
         Survey GetSurvey(int surveyId);
+        int GetCountSurveysByUserId(int userId);
         List<Survey> GetSurveysByUserId(int userId);
         List<Survey> GetSurveysByCreateFor(string createFor);
     }
