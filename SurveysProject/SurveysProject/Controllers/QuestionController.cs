@@ -27,10 +27,19 @@ namespace SurveysProject.Controllers
             return View();
         }
 
-        public IActionResult GetQuestionPage( int id)
+        public IActionResult GetQuestionPage( int id, int questionId)
         {
             DataModel data = new DataModel();
             data.Survey = surveyService.GetSurvey(id);
+            int optionsNumber = questionService.GetCountQuestionOptionByQuestionId(questionId);
+            if (optionsNumber < 2)
+            {
+                data.Question = questionService.GetQuestionById(questionId);
+                ViewBag.option = optionsNumber + 1;
+                ViewBag.question = questionService.GetCountQuestion(id);
+                ViewBag.optionsNumber = "The question must have at least 2 options!";
+                return View("Views/Question/QuestionOption.cshtml", data);
+            }
             ViewBag.question = questionService.GetCountQuestion(id) + 1;
             return View("Views/Question/Index.cshtml", data);
         }

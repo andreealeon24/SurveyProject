@@ -35,9 +35,34 @@ namespace SurveysProject.Controllers
             return View();
         }
 
-        public IActionResult CreatedSuccessfully()
+        public IActionResult CreatedSuccessfully(int surveyId, int questionId)
         {
-              return View();
+            DataModel model = new DataModel();
+            model.Survey = surveyService.GetSurvey(surveyId);
+            int  questionsNumber = questionService.GetCountQuestion(surveyId);
+            if (questionsNumber <= 0)
+            {
+                ViewBag.questionsNumber = "The survey must have at least one question!";
+                ViewBag.question = 1;
+                return View("Views/Question/Index.cshtml", model);
+            }
+            if (questionId == 0) {
+                model.Survey.Questions = questionService.GetQuestionsForSurvey(surveyId);
+                int id = model.Survey.Questions[questionsNumber-1].QuestionId;
+                if (questionService.GetCountQuestionOptionByQuestionId(id) >= 2)
+                {
+                    return View();
+                }
+            }
+            if (questionService.GetCountQuestionOptionByQuestionId(questionId)<2)
+            {
+                model.Question = questionService.GetQuestionById(questionId);
+                ViewBag.option = questionService.GetCountQuestionOptionByQuestionId(questionId) + 1;
+                ViewBag.question = questionsNumber;
+                ViewBag.optionsNumber = "The question must have at least 2 options!";
+                return View("Views/Question/QuestionOption.cshtml", model);
+            }
+            return View();
         }
 
         public IActionResult DeletedSuccessfully()
