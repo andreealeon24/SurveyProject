@@ -13,9 +13,9 @@
 </head>
 <body>
     <header>
-        <nav id="header" class="navbar navbar-expand-lg navbar-light" style="background-color:#4d90ba ">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color:#4d90ba ">
 
-            <div class="container" style="min-width: 1600px">
+            <div class="container" style="max-width:100%; margin-left:5%; margin-right:5%">
                 <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index"> <icon class="fa fa-list-alt" aria-hidden="true"></icon> Surveys Project</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,7 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy"><icon class="fa fa-get-pocket" aria-hidden="true"></icon> Privacy</a>
                         </li>
                     </ul>
-                        <ul class="navbar-nav flex-grow-1" style="margin-left:5%">
+                        <ul class="navbar-nav flex-grow-1" style="margin-left:23%">
                             <li class="nav-item">
                                 <a class="nav-link text-white" >Hello, @HttpContextAccessor.HttpContext.Session.GetString("Name")!</a>
                             </li>
@@ -72,7 +72,7 @@
                                 <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy"><icon class="fa fa-get-pocket" aria-hidden="true"></icon> Privacy</a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav flex-grow-1" style="margin-left: 20%">
+                        <ul class="navbar-nav flex-grow-1" style="margin-left: 33%">
                             <li class="nav-item">
                                 <a class="nav-link text-white">Hello, @HttpContextAccessor.HttpContext.Session.GetString("Name")!</a>
                             </li>
@@ -92,7 +92,7 @@
                         <a class="nav-link text-white" asp-area="" asp-controller="Statistics" asp-action="Index"><icon class="fa fa-pie-chart" aria-hidden="true"></icon> Statistics</a>
                     </li>
                 </ul>
-                        <ul class="navbar-nav flex-grow-1" style="margin-left: 55%">
+                        <ul class="navbar-nav flex-grow-1" style="margin-left: 63%">
                             <li class="nav-item">
                                 <a class="nav-link text-white">Hello, @HttpContextAccessor.HttpContext.Session.GetString("Name")!</a>
                             </li> 
