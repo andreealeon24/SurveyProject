@@ -33,10 +33,10 @@
                 </div>
                 <input asp-for="QuestionOption.QuestionOptionText" class="form-control" placeholder="Enter question option" id="questionOption" />
             </div>
-            <span asp-validation-for="QuestionOption.QuestionOptionText" class="text-danger"></span>
+            <p style="color:red; margin-top:2%; margin-bottom:2%">@ViewBag.errorQuestionOption</p>
         </div>
             <input type="submit" class="btn btn-info" value="Insert Question Option" />
         <a href="@Url.Action("GetQuestionPage", "Question", new { id = Model.Survey.Id })" type="button" class="btn btn-info">Add New Question</a>
-        <a href="@Url.Action("CreatedSuccessfully", "CreateSurvey")" type="button" class="btn btn-outline-info">Finish Survey</a>
+        <a href="@Url.Action("CreatedSuccessfully", "CreateSurvey", new { id = Model.Survey.Id })" type="button" class="btn btn-outline-info">Finish Survey</a>
     </form>
 </div>

@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace SurveysProject.Services
 {
@@ -19,8 +21,18 @@ namespace SurveysProject.Services
             this.surveyService = surveyService;
         }
 
+        public string Encrypt(string password)
+        {
+            string msg = "";
+            byte[] encode = new byte[password.Length];
+            encode = Encoding.UTF8.GetBytes(password);
+            msg = Convert.ToBase64String(encode);
+            return msg;
+        }
+
         public int AddUser(User user)
         {
+            user.Password = Encrypt(user.Password);
             context.User.Add(user);
             context.SaveChanges();
             return user.Id;
@@ -44,6 +56,7 @@ namespace SurveysProject.Services
 
         public User GetUser(string email, string password)
         {
+            password = Encrypt(password);
             return context.User.Where(x => x.Email == email && x.Password == password).FirstOrDefault();
         }
 

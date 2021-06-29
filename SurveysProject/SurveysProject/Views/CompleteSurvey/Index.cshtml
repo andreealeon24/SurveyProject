@@ -10,9 +10,9 @@
 <br />
 <br />
 
-@using (Html.BeginForm("AddResponse", "CompleteSurvey", new { surveyId=Model.Survey.Id, page=ViewBag.page}))
+@using (Html.BeginForm("AddResponse", "CompleteSurvey", new { surveyId = Model.Survey.Id, page = ViewBag.page }))
 {
-   
+
     <h3>@Model.Question.Text</h3>
     foreach (var item in Model.Question.Options)
     {
@@ -20,6 +20,7 @@
     }
 
     <br />
-    <input type="submit" class="btn btn-info" value="Next"/>
+    <p style="color:red; margin-top:2%; margin-bottom:2%">@ViewBag.errorComplete</p>
+    <input type="submit" class="btn btn-info" value="Next" />
 }
 

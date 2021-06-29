@@ -10,6 +10,7 @@ namespace SurveysProject.Services.Interfaces
     {
         int AddUser(User user);
         int DeleteUser(User user);
+        string Encrypt(string password);
         User GetUser(string email, string password);
         List<User> GetUsers();
         User GetUserById(int id);

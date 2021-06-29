@@ -68,11 +68,36 @@ namespace SurveysProject.Controllers
 
         public ActionResult AddResponse(int surveyId, int page, ResponseQuestion response)
         {
-            Survey survey = surveyService.GetSurvey(surveyId);
+            if (response.SelectedOptionId == 0)
+            {
+                Survey survey = surveyService.GetSurvey(surveyId);
+
+                List<Question> surveyQuestions = questionService.GetQuestionsForSurvey(surveyId).Skip(page).Take(1).ToList();
+
+                survey.Questions = new List<Question>();
+                foreach (Question question in surveyQuestions)
+                {
+                    List<QuestionOption> options = questionService.GetOptionsForQuestion(question.QuestionId);
+                    question.Options = new List<QuestionOption>();
+                    question.Options.AddRange(options);
+                    survey.Questions.Add(question);
+                }
+
+                ResponseQuestion resp = new ResponseQuestion()
+                {
+                    Survey = survey,
+                    Question = surveyQuestions[0],
+                };
+                ViewBag.errorComplete = "Select an option!";
+                response.Survey = survey;
+                ViewBag.page = page;
+                return View("Views/CompleteSurvey/Index.cshtml", resp);
+            }
+
             QuestionOption questionOption = questionService.GetOptionById(response.SelectedOptionId);
             Response responseQuestion = new Response();
-            responseQuestion.Survey = survey;
-            responseQuestion.QuestionOption= questionOption;
+            responseQuestion.Survey = surveyService.GetSurvey(surveyId);
+            responseQuestion.QuestionOption = questionOption;
             responseQuestion.Question = questionOption.Question;
             responseService.AddResponse(responseQuestion);
 
@@ -80,29 +105,29 @@ namespace SurveysProject.Controllers
             ViewBag.page = page;
 
             List<Question> questions = questionService.GetQuestionsForSurvey(surveyId).Skip(page).Take(1).ToList();
-            
-            if (questions.Count <= 0)
-            {
-                List<Survey> surveys = surveyService.GetSurveys();
-                return View("Views/CompleteSurvey/CompletedSuccessfully.cshtml", surveys);
-            }
 
-            survey.Questions = new List<Question>();
+            responseQuestion.Survey.Questions = new List<Question>();
             foreach (Question question in questions)
             {
                 List<QuestionOption> options = questionService.GetOptionsForQuestion(question.QuestionId);
                 question.Options = new List<QuestionOption>();
                 question.Options.AddRange(options);
-                survey.Questions.Add(question);
+                responseQuestion.Survey.Questions.Add(question);
             }
 
+            if (questions.Count <= 0)
+            {
+                List<Survey> surveys = surveyService.GetSurveys();
+                return View("Views/CompleteSurvey/CompletedSuccessfully.cshtml", surveys);
+            }
             ResponseQuestion respQ = new ResponseQuestion()
             {
-                Survey = survey,
+                Survey = responseQuestion.Survey,
                 Question = questions[0],
             };
 
             return View("Views/CompleteSurvey/Index.cshtml", respQ);
+            
         }
     }
 }

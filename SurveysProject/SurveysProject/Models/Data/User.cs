@@ -16,7 +16,7 @@ namespace SurveysProject.Models.Data
         [Column(TypeName = "nvarchar(100)")]
         public string Name { get; set; }
 
-        [Column(TypeName = "nvarchar(30)")]
+        [Column(TypeName = "nvarchar(100)")]
         public string Email{ get; set; }
 
         [Column(TypeName = "nvarchar(30)")]

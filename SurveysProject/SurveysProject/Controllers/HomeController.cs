@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using SurveysProject.Models;
@@ -21,7 +22,21 @@ namespace SurveysProject.Controllers
         }
         public IActionResult Index()
         {
-            List<Survey> surveys = surveyService.GetSurveys();
+            List<Survey> surveys = new List<Survey>();
+            if (HttpContext.Session.GetString("Role") == "Admin")
+            {
+                
+                surveys = surveyService.GetSurveys();
+
+            }
+            else if (HttpContext.Session.GetString("Role") == "Teacher")
+            {
+                surveys = surveyService.GetSurveysByUserId((int)HttpContext.Session.GetInt32("Id"));
+            }
+            else
+            {
+                surveys = surveyService.GetSurveysByCreateFor(HttpContext.Session.GetString("Role"));
+            }
             return View(surveys);
         }
 

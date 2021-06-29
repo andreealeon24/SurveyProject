@@ -23,12 +23,12 @@
                     <div class="input-group-text">@ViewBag.question</div>
                 </div>
                 <input asp-for="Question.Text" class="form-control" placeholder="Enter question" id="Question.Text" />
-                <span asp-validation-for="Question.Text" class="text-danger"></span>
             </div>
+            <p style="color:red; margin-top:2%; margin-bottom:2%">@ViewBag.errorQuestion</p>
         </div>
 
         <input type="submit" class="btn btn-info" value="Next to Question Options" />
-        <a href="@Url.Action("CreatedSuccessfully", "CreateSurvey")" type="button" class="btn btn-outline-info">Finish Survey</a>
+        <a href="@Url.Action("CreatedSuccessfully", "CreateSurvey", new { id = Model.Survey.Id })" type="button" class="btn btn-outline-info">Finish Survey</a>
     </form>
 </div>
 

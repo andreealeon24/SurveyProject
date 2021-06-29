@@ -37,7 +37,7 @@ namespace SurveysProject.Controllers
 
         public IActionResult CreatedSuccessfully()
         {
-            return View();
+              return View();
         }
 
         public IActionResult DeletedSuccessfully()
@@ -49,24 +49,41 @@ namespace SurveysProject.Controllers
         [HttpPost]
         public ActionResult AddSurvey(Survey survey)
         {
-            Survey survey2 = new Survey();
-            survey2.Title = survey.Title;
-            if (HttpContext.Session.GetString("Role") == "Admin")
+            if (HttpContext.Session.GetString("Role") == "Teacher")
             {
-                survey2.CreateFor = survey.CreateFor;
+                survey.CreateFor="Student";
             }
-            else
+            if (survey.Title == null && survey.CreateFor == null)
             {
-                survey2.CreateFor = "Student";
+                ViewBag.errorTitle = "Set a title!";
+                ViewBag.errorCreateFor = "set a role to complete this survey!";
+                return View("Views/CreateSurvey/Index.cshtml");
             }
-            survey2.User = userService.GetUserById((int)HttpContext.Session.GetInt32("Id"));
-            int surveyid = surveyService.AddSurvey(survey2);
-            Survey survey3 = surveyService.GetSurvey(surveyid);
+            else if(survey.Title==null)
+            {
 
-            DataModel model = new DataModel();
-            model.Survey = survey3;
-            ViewBag.question = 1;
-            return View("Views/Question/Index.cshtml", model);
+                ViewBag.errorTitle = "Set a title!";
+                return View("Views/CreateSurvey/Index.cshtml");
+            }
+            else if (survey.CreateFor == null)
+            {
+
+                ViewBag.errorCreateFor = "Set a role to complete this survey!";
+                return View("Views/CreateSurvey/Index.cshtml");
+            }
+
+                Survey survey2 = new Survey();
+                survey2.Title = survey.Title;
+                survey2.CreateFor = survey.CreateFor;
+                survey2.User = userService.GetUserById((int)HttpContext.Session.GetInt32("Id"));
+                int surveyid = surveyService.AddSurvey(survey2);
+                Survey survey3 = surveyService.GetSurvey(surveyid);
+
+                DataModel model = new DataModel();
+                model.Survey = survey3;
+                ViewBag.question = 1;
+                return View("Views/Question/Index.cshtml", model);
+            
         }
 
         public IActionResult DeleteSurvey(int surveyId)

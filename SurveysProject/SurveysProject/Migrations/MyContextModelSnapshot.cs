@@ -96,7 +96,7 @@ namespace SurveysProject.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(100)");

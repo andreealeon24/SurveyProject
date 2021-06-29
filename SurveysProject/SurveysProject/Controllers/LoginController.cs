@@ -26,7 +26,7 @@ namespace SurveysProject.Controllers
             return View();
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Login(User user)

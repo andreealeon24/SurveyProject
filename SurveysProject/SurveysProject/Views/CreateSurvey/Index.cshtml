@@ -15,17 +15,17 @@
         <div class="form-group">
             <label asp-for="Title" class="control-label"></label>
             <input asp-for="Title" class="form-control" placeholder="Enter title" id="title" />
-            <span asp-validation-for="Title" class="text-danger"></span>
+            <p style="color:red; margin-top:2%; margin-bottom:2%">@ViewBag.errorTitle</p>
         </div>
         @if (@HttpContextAccessor.HttpContext.Session.GetString("Role") == "Admin")
         {
             <div class="form-group">
                 <label asp-for="CreateFor" class="control-label"></label>
                 <input asp-for="CreateFor" class="form-control" placeholder="Student or Teacher?" id="createFor" />
-                <span asp-validation-for="CreateFor" class="text-danger"></span>
+                <p style="color:red; margin-top:2%; margin-bottom:2%">@ViewBag.errorCreateFor</p>
             </div>
         }
-
+        
         <input type="submit" class="btn btn-info" value="Next to Questions" />
     </form>
 </div>
